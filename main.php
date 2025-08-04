@@ -31,7 +31,7 @@
                 width:100px;
             }
             marquee {
-                color: red;
+                color: black;
                 font-size: 20px;
                 font-weight: bold;
             }
@@ -88,14 +88,14 @@
   </div>
 </nav>
     </div>
-    <img src="image.png" class="rounded float-start" alt="...">
-<img src="image.png" class="rounded float-end" alt="...">
-    <h1>Tugas</h1>
+    <img src="image copy.png" class="rounded float-start" alt="...">
+<img src="image copy 2.png" class="rounded float-end" alt="...">
+    <h1>Tugas Php</h1>
     <div class="img">
         <img src="image.png" alt="">
         <p>Rafka </p>
         <p>XI-RPL1</p>
-        <marquee behavior="" direction="">Hahahahahha!</marquee>
+        <marquee behavior="" direction="">Hello World i'm <b>Rafka Julian</b></marquee>
         <hr>
     </div>
     <?php
