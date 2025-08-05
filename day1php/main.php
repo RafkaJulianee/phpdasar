@@ -71,7 +71,7 @@
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#Tugas">Tugas</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Features</a>
@@ -105,7 +105,7 @@
     <marquee behavior="" direction="">Rafka Julian Pratama</marquee>
     <hr>
   </div>
-  <h1>Tugas 1🏫</h1>
+  <h1 id="tugas">Tugas 1🏫</h1>
 
   <?php
      $hari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat",
@@ -131,7 +131,7 @@ $buah["Jambu"]=2;
  echo "Buah Apel Ada:".$buah["Apel"]."<br>";
  echo "Buah Naga Ada:".$buah["Naga"]."<br>";
  echo "Buah Jambu Ada:".$buah["Jambu"]."<br>";
-echo "<hr>";
+ echo "<hr>";
  echo "   <h1>Tugas 3🚀</h1>";
 
  //if stetmen
