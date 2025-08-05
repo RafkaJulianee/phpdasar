@@ -7,6 +7,11 @@
   <title>Php|Dasar</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      
+    </style>
+    
   <style>
     * {
       margin: 0;
@@ -14,7 +19,7 @@
 
     body {
 
-      font-family: Arial, sans-serif;
+       font-family: 'Inter', Arial, sans-serif;
       background-color: white;
       color: #333;
       margin: 0;
@@ -33,6 +38,88 @@
       border-radius: 50px;
       height: 100px;
       width: 100px;
+    }
+    body {
+      background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+      min-height: 100vh;
+    }
+
+    .navbar {
+      background: linear-gradient(90deg, #6366f1 0%, #818cf8 100%) !important;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.1);
+    }
+
+    .navbar-brand, .nav-link, .dropdown-item {
+      color: #fff !important;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .nav-link.active {
+      color: #fbbf24 !important;
+    }
+
+    .navbar-toggler {
+      border-color: #fbbf24;
+    }
+
+    .img img {
+      border-radius: 50%;
+      border: 4px solid #6366f1;
+      box-shadow: 0 4px 16px rgba(99,102,241,0.15);
+      margin-bottom: 10px;
+    }
+
+    .img p {
+      color: #6366f1;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    h1 {
+      color: #6366f1;
+      font-weight: 700;
+      margin-top: 30px;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    marquee {
+      color: #fbbf24;
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    
+    }
+
+    hr {
+      border: none;
+      border-top: 2px solid #6366f1;
+      margin: 30px 0;
+      width: 60%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    div[style*="text-align:center;"] {
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 2px 12px rgba(99,102,241,0.07);
+      padding: 24px 0;
+      margin: 30px auto 20px auto;
+      width: 80%;
+      max-width: 600px;
+    }
+
+    @media (max-width: 600px) {
+      .img img {
+        width: 80px;
+        height: 80px;
+      }
+      div[style*="text-align:center;"] {
+        width: 98%;
+        padding: 12px 0;
+      }
     }
 
     marquee {
@@ -110,7 +197,7 @@
   <?php
      $hari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat",
  "Sabtu", "Minggu"];//array hari
-
+echo '<div style="text-align:center;">';
 echo "Hari " . $hari[0] . " = Sekolah<br>";//menampilkan hari
 echo "Hari " . $hari[1] . " = Sekolah<br>";
 echo "Hari " . $hari[2] . " = Sekolah<br>";
@@ -167,6 +254,8 @@ if ($karyawan=="Milk") {
 
 
 
+
+
  
 
 
@@ -184,9 +273,7 @@ if ($karyawan=="Milk") {
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
     crossorigin="anonymous"></script>
-  <script>
-
-  </script>
+  
 </body>
 
 </html>
