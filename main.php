@@ -246,6 +246,13 @@ if ($karyawan=="Milk") {
   echo "Anda Bukan Bagian Kami ";
 }
 
+echo"<h1>Tugas 4 👾</h1>";
+//looping
+$age=16;
+
+
+
+
 
 
 
