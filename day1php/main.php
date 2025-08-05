@@ -12,7 +12,7 @@
         body {
 
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: white;
             color: #333;
             margin: 0;
             padding: 20px;
@@ -52,6 +52,7 @@
         hr {
             border: 1px solid #ccc;
         }
+      
 
     </style>
 </head>
@@ -88,14 +89,14 @@
   </div>
 </nav>
     </div>
-    <img src="image copy.png" class="rounded float-start" alt="...">
-<img src="image copy 2.png" class="rounded float-end" alt="...">
+    <img src="image copy 4.png" class="rounded float-start" alt="...">
+<img src="image copy 3.png" class="rounded float-end" alt="...">
     <h1>Tugas Php</h1>
     <div class="img">
         <img src="image.png" alt="">
         <p>Rafka </p>
         <p>XI-RPL1</p>
-        <marquee behavior="" direction="">Hello World i'm <b>Rafka Julian</b></marquee>
+        <marquee behavior="" direction="">"Hello World i'm <b>Rafka Julian</b>";</marquee>
         <hr>
     </div>
     <?php
@@ -115,5 +116,8 @@ echo "Hari " . $hari[6] . " = Libur<br>";
     ?>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+<script>
+
+</script>
 </body>
 </html>
