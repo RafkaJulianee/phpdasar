@@ -96,7 +96,8 @@
         <img src="image.png" alt="">
         <p>Rafka </p>
         <p>XI-RPL1</p>
-        <marquee behavior="" direction="">"Hello World i'm <b>Rafka Julian</b>";</marquee>
+        <marquee behavior="" direction="">"Kumpulan Tugas<b> Php</b>";</marquee>
+        <marquee behavior="" direction="">Rafka Julian Pratama</marquee>
         <hr>
     </div>
     <?php
@@ -107,11 +108,19 @@ echo "Hari " . $hari[1] . " = Sekolah<br>";
 echo "Hari " . $hari[2] . " = Sekolah<br>";
 echo "Hari " . $hari[3] . " = Sekolah<br>";
 echo "Hari " . $hari[4] . " = Sekolah<br>";
-echo"<br>";
-echo"<hr>";
-
 echo "Hari " . $hari[5] . " = Libur<br>";
 echo "Hari " . $hari[6] . " = Libur<br>";
+echo "<br>";
+echo "<hr>";
+
+
+$gaji["Rafka"]=1000000;
+    $gaji["Julian"]=500000;
+    $gaji["Pratama"]=300000;
+
+    echo "Gaji Rafka Adalah=Rp ".$gaji["Rafka"]."<br>";
+    echo "Gaji Julian Adalah=Rp ".$gaji["Julian"]."<br>";
+    echo "Gaji Pratama Adalah=Rp ".$gaji["Pratama"]."<br>";
 
     ?>
 
