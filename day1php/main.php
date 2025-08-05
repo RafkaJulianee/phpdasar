@@ -134,9 +134,40 @@ $buah["Jambu"]=2;
 echo "<hr>";
  echo "   <h1>Tugas 3🚀</h1>";
 
- $x=1000;
- $y=2000;
- echo $x+$y;
+ //if stetmen
+ $nama="Rafka Julian Pratama";
+if ($nama=="Rafka Julian Pratama"){
+  echo "Nama Kamu Adalah:".  "$nama"."<br>";
+
+}else echo"Gagal";
+
+//2
+$usia =18;
+if ($usia==18){
+  echo"Boleh Masuk";
+}else"Ga Boleh Masuk";
+echo "<br>";
+
+//3
+$karyawan="Milk";
+$boss="Choko";
+if ($karyawan=="Milk") {
+  echo "Hallo Karyawan";
+} elseif ($karyawan=="Choko") {
+  echo "Hallo Boos Choko";
+} else {
+  echo "Anda Bukan Bagian Kami ";
+}
+
+
+
+
+
+
+
+
+
+ 
 
 
 
