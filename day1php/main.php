@@ -90,7 +90,7 @@
 </nav>
     </div>
     <img src="image copy 4.png" class="rounded float-start" alt="...">
-<img src="image copy 3.png" class="rounded float-end" alt="...">
+<img src="image copy 4.png" class="rounded float-end" alt="...">
     <h1>Tugas Php</h1>
     <div class="img">
         <img src="image.png" alt="">
@@ -100,9 +100,12 @@
         <marquee behavior="" direction="">Rafka Julian Pratama</marquee>
         <hr>
     </div>
+    <h1>Tugas 1🏫</h1>
+    
     <?php
      $hari = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat",
  "Sabtu", "Minggu"];//array hari
+ 
 echo "Hari " . $hari[0] . " = Sekolah<br>";//menampilkan hari
 echo "Hari " . $hari[1] . " = Sekolah<br>";
 echo "Hari " . $hari[2] . " = Sekolah<br>";
@@ -113,14 +116,18 @@ echo "Hari " . $hari[6] . " = Libur<br>";
 echo "<br>";
 echo "<hr>";
 
+echo "   <h1>Tugas 2🍇</h1>";
+$buah["Anggur"]=10;
+$buah["Apel"]=20;
+$buah["Naga"]=5;
+$buah["Jambu"]=2;
 
-$gaji["Rafka"]=1000000;
-    $gaji["Julian"]=500000;
-    $gaji["Pratama"]=300000;
+ echo "Buah Anggur Ada:".$buah["Anggur"]."<br>";
+ echo "Buah Apel Ada:".$buah["Apel"]."<br>";
+ echo "Buah Naga Ada:".$buah["Naga"]."<br>";
+ echo "Buah Jambu Ada:".$buah["Jambu"]."<br>";
+ echo"<hr>"
 
-    echo "Gaji Rafka Adalah=Rp ".$gaji["Rafka"]."<br>";
-    echo "Gaji Julian Adalah=Rp ".$gaji["Julian"]."<br>";
-    echo "Gaji Pratama Adalah=Rp ".$gaji["Pratama"]."<br>";
 
     ?>
 
