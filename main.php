@@ -248,12 +248,19 @@ if ($karyawan=="Milk") {
 
 echo"<h1>Tugas 4 👾</h1>";
 //looping
- for($i =1;$i<=20; $i++){
-  echo "Hello World Ke:$i<br>";
+ for($i =1;$i<=1; $i++){
+  echo "KONTOL RAFKA:$i<br>";
  }
  echo "<hr>";
 
  echo "<h1>Tugas 5</h1>";
+ $nama ="Rafka Julian Pratama";
+ $kelas="X RPL 1";
+ $jurusan=["Rekayasa Perangkat Lunak","TKR","TJKT"];
+
+ echo "anda berada di jurusan:". $jurusan [0];
+
+
 
 
 
