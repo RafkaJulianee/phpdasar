@@ -248,7 +248,13 @@ if ($karyawan=="Milk") {
 
 echo"<h1>Tugas 4 👾</h1>";
 //looping
-$age=16;
+ for($i =1;$i<=20; $i++){
+  echo "Hello World Ke:$i<br>";
+ }
+ echo "<hr>";
+
+ echo "<h1>Tugas 5</h1>";
+
 
 
 
