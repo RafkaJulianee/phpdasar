@@ -248,8 +248,8 @@ if ($karyawan=="Milk") {
 
 echo"<h1>Tugas 4 👾</h1>";
 //looping
- for($i =1;$i<=1; $i++){
-  echo "KONTOL RAFKA:$i<br>";
+ for($i =1;$i<=10; $i++){
+  echo "Hello World KE:$i<br>";
  }
  echo "<hr>";
 
@@ -258,7 +258,14 @@ echo"<h1>Tugas 4 👾</h1>";
  $kelas="X RPL 1";
  $jurusan=["Rekayasa Perangkat Lunak","TKR","TJKT"];
 
- echo "anda berada di jurusan:". $jurusan [0];
+ echo "anda berada di jurusan:". $jurusan [0].  "<br>" . "nama anda adalah". $nama . "<br>" ."anda berada di kelas". $kelas;
+ 
+
+$uang=500004893849;
+$hutang=10083273823;
+$sisauang= $uang - $hutang;
+echo "<br>";
+echo "Sisa Uang Anda Adalah:".$sisauang;
 
 
 
