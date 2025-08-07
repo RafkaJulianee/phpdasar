@@ -1,4 +1,7 @@
-/fadli ingin main ps di aceng
+
+
+<?php
+//fadli ingin main ps di aceng
 //jika aceng tidak ada fadli pergi ke rental ps
 //jika rental rental ps tutup apa yang kamu lakukan
 //implementasikam ke dalam bentuk if else dalam php
@@ -58,3 +61,4 @@ $barang=["kenjut","mmk","aceng"];
 $harga=["Rp10.000","Rp15.000","Rp20.000"];
 echo "Barang ini " . $barang[1] . "harga barang ini " .
  $harga[1];
+ ?>
