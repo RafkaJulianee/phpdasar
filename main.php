@@ -320,6 +320,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pilihan'])) {
 }
 
 
+//buatkan array dengan harga barang nya misal laptop harganya 
+//2.500.000 
+//
+$barang=["kenjut","mmk","aceng"];
+$harga=["Rp10.000","Rp15.000","Rp20.000"];
+echo "Barang ini " . $barang[1] . "harga barang ini " .
+ $harga[1];
+
+
 
 
 
