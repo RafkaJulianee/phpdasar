@@ -329,181 +329,124 @@ echo "Barang ini " . $barang[1] . "harga barang ini " .
  $harga[1];
 
 
+echo "<hr>";
+echo "<h1>Sistem Pemesanan Makanan 🍔</h1>";
 
-echo "<hr><h2>Daftar Siswa Kelas XI-RPL1</h2>";
-
-$siswa = [
-  [
-    "nama" => "Rafka Julian Pratama",
-    "nis" => "123456",
-    "foto" => "image.png",
-    "alamat" => "Jl. Mawar No. 1"
-  ],
-  [
-    "nama" => "Fadli Akbar",
-    "nis" => "123457",
-    "foto" => "image copy 4.png",
-    "alamat" => "Jl. Melati No. 2"
-  ],
-  [
-    "nama" => "Aceng Supriatna",
-    "nis" => "123458",
-    "foto" => "image copy 4.png",
-    "alamat" => "Jl. Kenanga No. 3"
-  ],
-  [
-    "nama" => "Choko Pratama",
-    "nis" => "123459",
-    "foto" => "image copy 4.png",
-    "alamat" => "Jl. Anggrek No. 4"
-  ]
+$menu = [
+  "Nasi Goreng" => 15000,
+  "Mie Ayam" => 12000,
+  "Ayam Geprek" => 17000,
+  "Sate Ayam" => 20000,
+  "Es Teh Manis" => 5000,
+  "Jus Alpukat" => 10000
 ];
 
-echo '<div style="overflow-x:auto">';
-echo '<table class="table table-bordered table-striped" style="max-width:700px;margin:20px auto;background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(99,102,241,0.07);">';
-echo '<thead class="table-primary"><tr>
-    <th>No</th>
-    <th>Foto</th>
-    <th>Nama</th>
-    <th>NIS</th>
-    <th>Alamat</th>
-  </tr></thead><tbody>';
-foreach ($siswa as $i => $s) {
-  echo "<tr>";
-  echo "<td>".($i+1)."</td>";
-  echo "<td><img src='".htmlspecialchars($s['foto'])."' alt='foto' style='width:60px;height:60px;border-radius:50%;border:2px solid #6366f1;box-shadow:0 2px 8px rgba(99,102,241,0.12);'></td>";
-  echo "<td>".htmlspecialchars($s['nama'])."</td>";
-  echo "<td>".htmlspecialchars($s['nis'])."</td>";
-  echo "<td>".htmlspecialchars($s['alamat'])."</td>";
-  echo "</tr>";
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pesan'])) {
+  $pesanan = $_POST['menu'] ?? [];
+  $jumlah = $_POST['jumlah'] ?? [];
+  $total = 0;
+  echo '<div class="card mx-auto" style="max-width:400px;background:#f1f5ff;border-radius:18px;box-shadow:0 2px 12px rgba(99,102,241,0.07);">';
+  echo '<div class="card-body">';
+  echo "<h4 class='card-title mb-3' style='color:#6366f1;'>Detail Pesanan</h4>";
+  if (!empty($pesanan)) {
+    echo "<ul class='list-group mb-3'>";
+    foreach ($pesanan as $i => $makanan) {
+      $jml = intval($jumlah[$i]);
+      $harga = $menu[$makanan];
+      $subtotal = $harga * $jml;
+      $total += $subtotal;
+      echo "<li class='list-group-item d-flex justify-content-between align-items-center'>";
+      echo "<span>$makanan <span class='badge bg-primary rounded-pill'>$jml</span></span>";
+      echo "<span>Rp " . number_format($subtotal, 0, ',', '.') . "</span>";
+      echo "</li>";
+    }
+    echo "</ul>";
+    echo "<h5 class='text-end' style='color:#fbbf24;'>Total: Rp " . number_format($total, 0, ',', '.') . "</h5>";
+  } else {
+    echo "<p class='text-danger'>Belum ada makanan yang dipilih.</p>";
+  }
+  echo '<a href="" class="btn btn-outline-primary mt-3">Pesan Lagi</a>';
+  echo '</div></div>';
+} else {
+  echo '<form method="post" class="mx-auto" style="max-width:400px;background:#fff;border-radius:18px;box-shadow:0 2px 12px rgba(99,102,241,0.07);padding:24px;">';
+  echo "<h4 class='mb-3' style='color:#6366f1;'>Pilih Menu Makanan</h4>";
+  foreach ($menu as $nama => $harga) {
+    echo '<div class="input-group mb-2">';
+    echo '<div class="input-group-text">';
+    echo '<input class="form-check-input mt-0" type="checkbox" name="menu[]" value="'.$nama.'">';
+    echo '</div>';
+    echo '<input type="text" class="form-control" value="'.$nama.'" readonly style="background:#f1f5ff;font-weight:600;">';
+    echo '<span class="input-group-text" style="background:#e0e7ff;">Rp '.number_format($harga,0,',','.').'</span>';
+    echo '<input type="number" min="1" max="10" name="jumlah[]" class="form-control" value="1" style="width:70px;">';
+    echo '</div>';
+  }
+  echo '<button type="submit" name="pesan" class="btn btn-primary w-100 mt-3" style="background:linear-gradient(90deg,#6366f1 0%,#818cf8 100%);border:none;">Pesan Sekarang</button>';
+  echo '</form>';
 }
-echo '</tbody></table></div>';
- echo "<hr><h2>Manajemen Jadwal</h2>";
+
+echo "<hr>";
+echo "<h1>Admin: Terima Pesanan</h1>";
 
 session_start();
-if (!isset($_SESSION['jadwal'])) {
-    $_SESSION['jadwal'] = [];
+
+// Simpan pesanan ke session jika ada pesanan baru
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pesan'])) {
+  $pesananBaru = [
+    'menu' => $_POST['menu'] ?? [],
+    'jumlah' => $_POST['jumlah'] ?? [],
+    'waktu' => date('Y-m-d H:i:s')
+  ];
+  if (!isset($_SESSION['daftar_pesanan'])) {
+    $_SESSION['daftar_pesanan'] = [];
+  }
+  $_SESSION['daftar_pesanan'][] = $pesananBaru;
 }
 
-// Tambah Jadwal
-if (isset($_POST['tambah'])) {
-    $nama = $_POST['nama'] ?? '';
-    $waktu = $_POST['waktu'] ?? '';
-    $foto = '';
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-        $target = "uploads/";
-        if (!is_dir($target)) mkdir($target);
-        $filename = uniqid() . '_' . basename($_FILES['foto']['name']);
-        $filepath = $target . $filename;
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $filepath)) {
-            $foto = $filepath;
-        }
-    }
-    if ($nama && $waktu) {
-        $_SESSION['jadwal'][] = [
-            'nama' => $nama,
-            'waktu' => $waktu,
-            'foto' => $foto
-        ];
-    }
+// Admin menerima pesanan
+if (isset($_GET['terima']) && isset($_SESSION['daftar_pesanan'][$_GET['terima']])) {
+  $_SESSION['daftar_pesanan'][$_GET['terima']]['diterima'] = true;
+  echo "<div class='alert alert-success'>Pesanan #" . ($_GET['terima']+1) . " telah diterima!</div>";
 }
 
-// Hapus Jadwal
-if (isset($_GET['hapus'])) {
-    $idx = (int)$_GET['hapus'];
-    if (isset($_SESSION['jadwal'][$idx])) {
-        if ($_SESSION['jadwal'][$idx]['foto'] && file_exists($_SESSION['jadwal'][$idx]['foto'])) {
-            unlink($_SESSION['jadwal'][$idx]['foto']);
-        }
-        array_splice($_SESSION['jadwal'], $idx, 1);
-    }
-    header("Location: " . strtok($_SERVER["REQUEST_URI"], '?'));
-    exit;
-}
-
-// Edit Jadwal
-if (isset($_POST['edit'])) {
-    $idx = (int)$_POST['idx'];
-    $nama = $_POST['nama'] ?? '';
-    $waktu = $_POST['waktu'] ?? '';
-    $foto = $_SESSION['jadwal'][$idx]['foto'];
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
-        $target = "uploads/";
-        if (!is_dir($target)) mkdir($target);
-        $filename = uniqid() . '_' . basename($_FILES['foto']['name']);
-        $filepath = $target . $filename;
-        if (move_uploaded_file($_FILES['foto']['tmp_name'], $filepath)) {
-            if ($foto && file_exists($foto)) unlink($foto);
-            $foto = $filepath;
-        }
-    }
-    $_SESSION['jadwal'][$idx] = [
-        'nama' => $nama,
-        'waktu' => $waktu,
-        'foto' => $foto
-    ];
-}
-
-// Form Tambah Jadwal
-echo '<form method="post" enctype="multipart/form-data">
-    <input type="text" name="nama" placeholder="Nama Jadwal" required>
-    <input type="text" name="waktu" placeholder="Waktu" required>
-    <input type="file" name="foto" accept="image/*">
-    <button type="submit" name="tambah">Tambah Jadwal</button>
-</form>';
-
-// Tabel Jadwal
-echo '<table border="1" cellpadding="5" style="margin-top:10px;"><tr><th>No</th><th>Nama</th><th>Waktu</th><th>Foto</th><th>Aksi</th></tr>';
-foreach ($_SESSION['jadwal'] as $i => $j) {
+// Tampilkan daftar pesanan
+if (!empty($_SESSION['daftar_pesanan'])) {
+  echo "<div class='table-responsive'><table class='table table-bordered'>";
+  echo "<thead><tr><th>#</th><th>Waktu</th><th>Pesanan</th><th>Status</th><th>Aksi</th></tr></thead><tbody>";
+  foreach ($_SESSION['daftar_pesanan'] as $idx => $pesanan) {
     echo "<tr>";
-    echo "<td>" . ($i+1) . "</td>";
-    echo "<td>" . htmlspecialchars($j['nama']) . "</td>";
-    echo "<td>" . htmlspecialchars($j['waktu']) . "</td>";
+    echo "<td>" . ($idx+1) . "</td>";
+    echo "<td>" . htmlspecialchars($pesanan['waktu']) . "</td>";
     echo "<td>";
-    if ($j['foto'] && file_exists($j['foto'])) {
-        echo '<img src="' . htmlspecialchars($j['foto']) . '" width="60">';
+    if (!empty($pesanan['menu'])) {
+      echo "<ul style='margin-bottom:0;'>";
+      foreach ($pesanan['menu'] as $i => $makanan) {
+        $jml = intval($pesanan['jumlah'][$i]);
+        echo "<li>" . htmlspecialchars($makanan) . " <span class='badge bg-primary'>$jml</span></li>";
+      }
+      echo "</ul>";
     }
     echo "</td>";
-    echo "<td>
-        <a href='?edit=$i'>Edit</a> | 
-        <a href='?hapus=$i' onclick=\"return confirm('Yakin hapus?')\">Hapus</a>
-    </td>";
-    echo "</tr>";
-}
-echo '</table>';
-
-// Form Edit Jadwal
-if (isset($_GET['edit'])) {
-    $idx = (int)$_GET['edit'];
-    if (isset($_SESSION['jadwal'][$idx])) {
-        $j = $_SESSION['jadwal'][$idx];
-        echo '<hr><h3>Edit Jadwal</h3>
-        <form method="post" enctype="multipart/form-data">
-            <input type="hidden" name="idx" value="' . $idx . '">
-            <input type="text" name="nama" value="' . htmlspecialchars($j['nama']) . '" required>
-            <input type="text" name="waktu" value="' . htmlspecialchars($j['waktu']) . '" required>
-            <input type="file" name="foto" accept="image/*">
-            <button type="submit" name="edit">Simpan Perubahan</button>
-        </form>';
+    echo "<td>";
+    if (!empty($pesanan['diterima'])) {
+      echo "<span class='badge bg-success'>Diterima</span>";
+    } else {
+      echo "<span class='badge bg-warning text-dark'>Menunggu</span>";
     }
+    echo "</td>";
+    echo "<td>";
+    if (empty($pesanan['diterima'])) {
+      echo "<a href='?terima=$idx' class='btn btn-success btn-sm'>Terima</a>";
+    } else {
+      echo "-";
+    }
+       echo "</td>";
+    echo "</tr>";
+  }
+  echo "</tbody></table></div>";
+} else {
+  echo "<p class='text-muted'>Belum ada pesanan masuk.</p>";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
  
@@ -516,9 +459,7 @@ if (isset($_GET['edit'])) {
 
 
 
-
-
-    ?>
+?>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
