@@ -8,7 +8,8 @@
 <body>
     <?php
     $nama="Rafka Julian Pratama";
-    $kelas="XI"
+    $kelas="XI RPL 1";
+    $divisi=["FrontEnd","Backend","UI/UX","FullStack"]
     ?>
 
     
