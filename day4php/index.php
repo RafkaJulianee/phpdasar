@@ -10,6 +10,10 @@
     $nama="Rafka Julian Pratama";
     $kelas="XI RPL 1";
     $divisi=["FrontEnd","Backend","UI/UX","FullStack"]
+
+    echo "Haloo,.$nama👋";
+
+
     ?>
 
     
