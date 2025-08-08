@@ -7,7 +7,8 @@
 </head>
 <body>
     <?php
-    $
+    $nama="Rafka Julian Pratama";
+    $kelas="XI"
     ?>
 
     
