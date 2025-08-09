@@ -1,4 +1,4 @@
 
 
 nama="Rafka Julian Pratama"
-print(nama)
+print(f"Haloo,"+nama+'👋')
