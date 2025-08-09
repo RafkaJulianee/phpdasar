@@ -1,4 +1,10 @@
 
 
 nama="Rafka Julian Pratama"
-print(f"Haloo,"+nama+'👋')
+nilai1=["90","80","70"]
+print(f"Haloo,"+nama+'👋,'+
+      "Nilai Kamu Adalah"+nilai1[0]+"😎"
+      
+
+
+)
