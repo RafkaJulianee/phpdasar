@@ -1,158 +1,145 @@
- 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Dashboard Jana</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>PHP Mobile Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --primary: #1fc8db;
-            --secondary: #76e5fc;
-            --gold: #ffd700;
-            --background: #f8fafc;
-            --glass: rgba(255,255,255,0.7);
-            --text: #183153;
+            --primary: #6c63ff;
+            --secondary: #48c6ef;
+            --accent: #ffd166;
+            --background: #f6f8fc;
+            --card: #ffffffcc;
+            --text: #22223b;
+            --muted: #adb5bd;
         }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: var(--text);
+        html, body {
+            background: linear-gradient(120deg, var(--secondary) 0%, var(--primary) 100%);
             min-height: 100vh;
-            margin: 0;
-        }
-        .navbar {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%) !important;
-            box-shadow: 0 4px 24px rgba(31,200,219,0.13);
-            border-bottom: 2px solid var(--gold);
-        }
-        .navbar-brand, .nav-link {
-            color: var(--gold) !important;
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
         }
         .container {
-            max-width: 1100px;
+            max-width: 480px;
             margin: 0 auto;
-            padding: 2.5rem 1rem;
+            padding: 1.2rem 0.7rem 2.5rem 0.7rem;
         }
         .glass-card {
-            background: var(--glass);
+            background: var(--card);
             border-radius: 22px;
-            box-shadow: 0 8px 32px 0 rgba(31,200,219,0.18);
-            backdrop-filter: blur(8px);
-            border: 1.5px solid rgba(31,200,219,0.18);
-            padding: 2.5rem 2rem;
-            margin: 2rem 0;
+            box-shadow: 0 4px 24px 0 rgba(108,99,255,0.10);
+            padding: 1.5rem 1.2rem;
+            margin: 1.2rem 0;
+            border: none;
         }
         .profile-img {
-            width: 120px;
-            height: 120px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            border: 4px solid var(--gold);
-            box-shadow: 0 4px 24px rgba(31,200,219,0.13);
-            margin: 0 auto 1rem auto;
+            border: 3px solid var(--accent);
+            margin: 0 auto 0.7rem auto;
             display: block;
             background: #fff;
+            object-fit: cover;
         }
         h1, h2, h4 {
             color: var(--primary);
             font-weight: 700;
+            margin-bottom: .7rem;
         }
         h1 {
-            font-size: 2.5rem;
-            margin: 2rem 0 1.5rem 0;
-            letter-spacing: 1px;
-        }
-        .btn-primary, .btn-success {
-            background: linear-gradient(90deg, var(--primary) 0%, var(--gold) 100%);
-            border: none;
-            font-weight: 600;
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(31,200,219,0.13);
-            transition: transform 0.15s;
-        }
-        .btn-primary:hover, .btn-success:hover {
-            transform: translateY(-2px) scale(1.04);
-            background: linear-gradient(90deg, var(--gold) 0%, var(--primary) 100%);
-            color: var(--text);
-        }
-        .table {
-            background: var(--glass);
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(31,200,219,0.09);
-        }
-        .table th {
-            background: var(--primary);
-            color: var(--gold);
-            font-weight: 700;
-            letter-spacing: 1px;
+            font-size: 2rem;
         }
         .badge {
             font-weight: 600;
-            background: var(--gold);
+            background: var(--accent);
             color: var(--primary);
+            border-radius: 10px;
+            font-size: 1rem;
         }
-        marquee {
-            color: var(--primary);
+        .btn-primary, .btn-success {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+            border: none;
+            font-weight: 600;
+            color: #fff;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            padding: .7rem 1.2rem;
+            margin-top: .3rem;
+        }
+        .btn-primary:active, .btn-success:active {
+            background: var(--primary);
+        }
+        .table {
+            background: transparent;
+            border-radius: 14px;
+            overflow: hidden;
+            font-size: 1rem;
+        }
+        .table th {
+            background: var(--primary);
+            color: #fff;
             font-weight: 700;
-            margin: 1rem 0;
-            background: var(--glass);
-            border-radius: 8px;
-            padding: 0.5rem 0;
+            letter-spacing: .5px;
+            border: none;
         }
-        hr {
-            border-color: var(--primary);
-            opacity: 0.15;
+        .table td {
+            background: var(--card);
+            border: none;
+        }
+        .alert-success {
+            background: #e0ffe0;
+            color: var(--primary);
+            border: none;
+            font-weight: 600;
+            border-radius: 12px;
+        }
+        .text-muted {
+            color: var(--muted) !important;
         }
         .form-select, .form-control, .input-group-text {
-            border-radius: 10px !important;
+            border-radius: 12px !important;
             border: 1.5px solid var(--primary);
+            font-size: 1rem;
+        }
+        .input-group-text {
+            background: #f3f0ff;
         }
         .list-group-item {
             background: transparent;
             border: none;
             color: var(--text);
         }
-        .alert-success {
-            background: linear-gradient(90deg, #e0ffe0 0%, #d1fff7 100%);
+        marquee {
             color: var(--primary);
-            border: 1.5px solid var(--primary);
-            font-weight: 600;
+            font-weight: 700;
+            margin: .7rem 0;
+            background: #f3f0ff;
+            border-radius: 10px;
+            padding: .4rem 0;
+            font-size: 1.1rem;
         }
-        .text-muted {
-            color: #7bb7b7 !important;
+        hr {
+            border-color: var(--primary);
+            opacity: 0.10;
+        }
+        @media (max-width: 600px) {
+            h1 { font-size: 1.5rem; }
+            .glass-card { padding: 1.1rem 0.7rem; }
+            .container { padding: 0.7rem 0.2rem 2rem 0.2rem; }
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">RafkaJulian</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#tugas">Tugas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#pesanan">Pesanan</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
     <div class="container">
         <div class="glass-card text-center">
             <img src="image.png" alt="Profile" class="profile-img">
             <h2>Rafka Julian Pratama</h2>
-            <p style="color:var(--gold);font-weight:600;">XI-RPL1</p>
+            <p style="color:var(--accent);font-weight:600;">XI-RPL1</p>
             <marquee>"Kumpulan Tugas PHP"</marquee>
         </div>
 
@@ -252,12 +239,12 @@ $barang = [
   "Keyboard" => 50000
 ];
 echo '<form method="post" class="row g-2 align-items-center">';
-echo '<div class="col-auto"><select name="pilihan" class="form-select">';
+echo '<div class="col-12 mb-2"><select name="pilihan" class="form-select">';
 foreach ($barang as $nama => $harga) {
   echo "<option value=\"$nama\">$nama</option>";
 }
 echo '</select></div>';
-echo '<div class="col-auto"><button type="submit" class="btn btn-primary">Lihat Harga</button></div>';
+echo '<div class="col-12"><button type="submit" class="btn btn-primary w-100">Lihat Harga</button></div>';
 echo '</form>';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pilihan'])) {
   $pilih = $_POST['pilihan'];
@@ -289,7 +276,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pesan'])) {
   $pesanan = $_POST['menu'] ?? [];
   $jumlah = $_POST['jumlah'] ?? [];
   $total = 0;
-  echo '<div class="glass-card" style="max-width:400px;margin:1rem auto;background:#eafffa;">';
+  echo '<div class="glass-card" style="max-width:400px;margin:1rem auto;background:#eaf4ff;">';
   echo "<h4 class='mb-3' style='color:var(--primary);'>Detail Pesanan</h4>";
   if (!empty($pesanan)) {
     echo "<ul class='list-group mb-3'>";
@@ -304,21 +291,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pesan'])) {
       echo "</li>";
     }
     echo "</ul>";
-    echo "<h5 class='text-end' style='color:var(--gold);'>Total: Rp " . number_format($total, 0, ',', '.') . "</h5>";
+    echo "<h5 class='text-end' style='color:var(--accent);'>Total: Rp " . number_format($total, 0, ',', '.') . "</h5>";
   } else {
     echo "<p class='text-danger'>Belum ada makanan yang dipilih.</p>";
   }
-  echo '<a href="" class="btn btn-primary mt-3">Pesan Lagi</a>';
+  echo '<a href="" class="btn btn-primary mt-3 w-100">Pesan Lagi</a>';
   echo '</div>';
 } else {
-  echo '<form method="post" class="mx-auto" style="max-width:400px;background:var(--glass);border-radius:18px;box-shadow:0 2px 12px rgba(31,200,219,0.07);padding:24px;">';
+  echo '<form method="post" class="mx-auto" style="max-width:400px;background:var(--card);border-radius:18px;box-shadow:0 2px 12px rgba(108,99,255,0.07);padding:18px;">';
   echo "<h4 class='mb-3' style='color:var(--primary);'>Pilih Menu Makanan</h4>";
   foreach ($menu as $nama => $harga) {
     echo '<div class="input-group mb-2">';
     echo '<div class="input-group-text">';
     echo '<input class="form-check-input mt-0" type="checkbox" name="menu[]" value="'.$nama.'">';
     echo '</div>';
-    echo '<input type="text" class="form-control" value="'.$nama.'" readonly style="background:#eafffa;font-weight:600;">';
+    echo '<input type="text" class="form-control" value="'.$nama.'" readonly style="background:#f3f0ff;font-weight:600;">';
     echo '<span class="input-group-text" style="background:#e0e7ff;">Rp '.number_format($harga,0,',','.').'</span>';
     echo '<input type="number" min="1" max="10" name="jumlah[]" class="form-control" value="1" style="width:70px;">';
     echo '</div>';
@@ -375,7 +362,7 @@ if (!empty($_SESSION['daftar_pesanan'])) {
     echo "</td>";
     echo "<td>";
     if (empty($pesanan['diterima'])) {
-      echo "<a href='?terima=$idx' class='btn btn-success btn-sm'>Terima</a>";
+      echo "<a href='?terima=$idx' class='btn btn-success btn-sm w-100'>Terima</a>";
     } else {
       echo "-";
     }
