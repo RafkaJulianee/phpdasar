@@ -1,10 +1,8 @@
 
 
 //fungi dalam js
-function nama + nomer(){
+function menyapa(nama,nomer){
     console.log(`Hello${nama}!`)
     console.log(nomer)
 }
-
-nama="Rafka Julian Pratama"
-nomer=
+menyapa("Rafka Julian Pratama")
