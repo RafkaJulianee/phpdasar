@@ -9,11 +9,41 @@
     <h1>Haloo</h1>
     <script>
         //fungi dalam js
+        //fungsi dasar
 function menyapa(nama,nomer){
     console.log(`Hello,${nama}!`)
     console.log(nomer)
 }
 menyapa(`Rafka JUlian Pratama`,100292983)
+
+//arrow fungsion
+const sapa=(nama)=>{
+    console.log(`Halo,${nama}`)
+
+}
+sapa("Julianzhao")
+//arrow lebih singkat dan serng digunakan
+const halo = siswa =>console.log(`Haii,${siswa}`)
+halo("Naomi")
+
+//callback 
+
+function jalankan (callback){
+    console.log("Mulai Proses")
+    callback()
+    console.log("proses selesai")
+
+}
+
+function hai(){
+    console.log("Halo,Ini dari CallBack")
+
+}
+jalankan(hai)
+
+
+
+
 
     </script>
 </body>
