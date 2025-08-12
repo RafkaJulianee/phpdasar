@@ -12,32 +12,53 @@
     </style>
 </head>
 <body>
-    <h1 id="judul">Hello World</h1>
+    <!-- <h1 id="judul">Hello World</h1>
     <p class="teks">zhao</p>
     <h2 id="rafka1">Sampurasun</h2>
     <h1 id="style">Mengubah Style Element</h1>
     <h1 id="haha">ii</h1>
     <button id="tombol">ganti teks</button>
-    
+     -->
+    <h1 id="angka">0
+        <button id="tambah">+</button>
+        <button id="kurang">-</button>
+
+    </h1>
 
     <script>
-        //berdasarkan id
-        document.getElementById("judul")
-        console.log("Hahahahahaha")
-        //berdasarkan css selector
-        let element =document.querySelector(".teks")
-        console.log(element)
+        let angka = 0;
+        document.getElementById("tambah").addEventListener
+    ("click", function (){
+        angka++
+        document.getElementById("angka").innerText=angka
 
-        //mengubah teks element
-        document.getElementById("rafka1").innerText="Rampes"
+    })
 
-        let style = document.getElementById("style")
-        style.style.color="purple"//mengubah warna teks
-        style.style.backgroundColor="black"
-        //mengganti teks saat di click
-        document.getElementById("tombol").addEventListener("click", function() {
-    document.getElementById("haha").innerText = "Teks Nya Berubah";
-});
+    document.getElementById("kurang").addEventListener
+    ("click", function(){
+        angka--
+        document.getElementById("angka").innerText=angka
+    })
+
+
+//         //berdasarkan id
+//         document.getElementById("judul")
+//         console.log("Hahahahahaha")
+//         //berdasarkan css selector
+//         let element =document.querySelector(".teks")
+//         console.log(element)
+
+//         //mengubah teks element
+//         document.getElementById("rafka1").innerText="Rampes"
+
+//         let style = document.getElementById("style")
+//         style.style.color="purple"//mengubah warna teks
+//         style.style.backgroundColor="black"
+//         //mengganti teks saat di click
+//         document.getElementById("tombol").addEventListener("click", function() {
+//     document.getElementById("haha").innerText = "Teks Nya Berubah";
+// });
+
 
 
 
