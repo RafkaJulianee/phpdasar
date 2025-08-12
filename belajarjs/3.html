@@ -5,11 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>p</title>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+    </style>
 </head>
 <body>
     <h1 id="judul">Hello World</h1>
     <p class="teks">zhao</p>
     <h2 id="rafka1">Sampurasun</h2>
+    <h1 id="style">Mengubah Style Element</h1>
+    <h1 id="haha">ii</h1>
+    <button id="tombol">ganti teks</button>
+    
 
     <script>
         //berdasarkan id
@@ -22,7 +31,14 @@
         //mengubah teks element
         document.getElementById("rafka1").innerText="Rampes"
 
-        
+        let style = document.getElementById("style")
+        style.style.color="purple"//mengubah warna teks
+        style.style.backgroundColor="black"
+        //mengganti teks saat di click
+        document.getElementById("tombol").addEventListener("click", function() {
+    document.getElementById("haha").innerText = "Teks Nya Berubah";
+});
+
 
 
 
