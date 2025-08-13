@@ -12,12 +12,39 @@
 </head>
 <body>
     <h1>Kalkulator Sederhana</h1>
+    <h2>Pertambahan</h2>
     <input type="number" id="angka1" placeholder="Angka Pertama">
+    <br>
+    <br>
     <input type="number" id="angka2" placeholder="Angka Kedua">
-    <button id="tambah">Tambah</button>
+    <br>
+    <button id="tambah" style="text-align: center;">Tambah</button>
     <h2>Hasil: <span id="hasil">0</span></h2>
+    <h2>Perkalian</h2>
+    <input type="number" name="" id="kali1" placeholder="Angka1"><br><br>
+    <input type="number" name="" id="kali2" placeholder="Angka2">
+    <br><br>
+    <button id="kali">Kali</button>
+    <h2>Hasil: <span id="hasil">0</span></h2>
+    <h2></h2>
+
    <script>
-   document
+  document.getElementById("tambah").addEventListener("click", function() {
+    let angka1 = parseFloat(document.getElementById("angka1").value);
+    let angka2 = parseFloat(document.getElementById("angka2").value);
+    let total = angka1 + angka2;
+
+    
+});
+document.getElementById("kali").addEventListener("click", function(){
+    let kali1= parseFloat(document.getElementById(kali1).value)
+    let kali2= parseFloat(document.getElementById(kali2).value)
+    let total = kali1-kali2
+    document.getElementById("hasil").innerText = total;
+})
+
+
+
     </script>
 </body>
 </html>
