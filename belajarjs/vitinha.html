@@ -11,6 +11,9 @@
             font-family: sans-serif;
 
         }
+        h1{
+            text-align: center;
+        }
         button{
         background: linear-gradient(90deg, #ff9800 0%, #ff5722 100%);
         color: #fff;
@@ -34,9 +37,15 @@
 </head>
 <body>
     
-    <h1>Hello,Pelanggan ZiFood👋</h1>
+    <h1 id="teks1">Hello,Pelanggan ZiFood👋</h1>
     <button id="button">Contact Me</button>
-    <script></script>
+    <script>
+        document.getElementById("teks1").addEventListener("click", function(){
+            document.getElementById("button").addEventListener("click", function() {
+                document.getElementById("teks1").innerHTML = "Terima kasih sudah menghubungi!";
+            });
+        })
+    </script>
     
 
 </body>
