@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-body {
-  margin: 0;
-  font-family: sans-serif;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafka</title>
+    <link rel="shortcut icon" href="image.png" type="image/x-icon">
+    <style>
+       .card {
+  width: 300px;   
+  margin-top: 200px;              /* lebar kotak */
+  padding: 20px;                /* jarak dalam */
+  background: white;            /* warna kotak */
+  border-radius: 10px;          /* sudut melengkung */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* bayangan */
+  text-align: center;           /* teks di tengah */
+  font-family: Arial, sans-serif;
 }
-.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: navy;
+
+.card h2 {
+  margin-top: 0;
+}
+
+.card button {
+  padding: 10px 15px;
+  background: blue;
   color: white;
-  text-align: center;
-  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;              /* kursor jadi tangan */
+  transition: background 0.3s ease;
 }
 
-.container {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 60px;
+.card button:hover {
+  background: darkblue;
 }
 
-.card {
-  background: lightblue;
-  padding: 20px;
-  width: 200px;
-}
-</style>
+    </style>
 </head>
 <body>
-
-<div class="header">Header Menempel di Atas</div>
-
-<div class="container">
-  <div class="card">Kotak 1</div>
-  <div class="card">Kotak 2</div>
-  <div class="card">Kotak 3</div>
+    <div class="card">
+  <h2>Judul Card</h2>
+  <p>Ini adalah isi card. Bisa berisi teks atau gambar.</p>
+  <button>Click Me</button>
 </div>
 
+    
 </body>
 </html>
