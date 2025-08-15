@@ -1,30 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
 <style>
-    body{
-        font-family: sans-serif;
-    }
-     h1{
-        box-sizing: border-box;
-        font-size: medium;
-        padding: 5px;
-        color: red;
-       background: rgba(0, 0, 255, 0.5); /* biru transparan */
+body {
+  margin: 0;
+  font-family: sans-serif;
+}
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: navy;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
 
-       margin: 10px 30px;
-;
+.container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 60px;
+}
 
-
-
-     }
+.card {
+  background: lightblue;
+  padding: 20px;
+  width: 200px;
+}
 </style>
+</head>
 <body>
-    <h1>Nemanja Vidic</h1>
-    <p>A legend Center Back In emyu</p>
+
+<div class="header">Header Menempel di Atas</div>
+
+<div class="container">
+  <div class="card">Kotak 1</div>
+  <div class="card">Kotak 2</div>
+  <div class="card">Kotak 3</div>
+</div>
+
 </body>
 </html>
