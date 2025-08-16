@@ -6,10 +6,14 @@
     <title>Rafka</title>
     <link rel="shortcut icon" href="image.png" type="image/x-icon">
     <style>
+
+        body{
+            font-family: sans-serif;
+        }
        .card {
   width: 150px;   
   margin-top: 150px;              /* lebar kotak */
-  padding: 20px;                /* jarak dalam */
+  padding: 1;                /* jarak dalam */
   background: white;            /* warna kotak */
   border-radius: 10px;          /* sudut melengkung */
   box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* bayangan */
@@ -35,14 +39,60 @@
   background: darkblue;
 }
 
+ul{
+    justify-content: center;
+}
+li{
+    font-family: sans-serif;
+    display: flex;
+    display: inline-block;
+    margin-right:20px ;
+    justify-content: center;
+           /* pastikan lebar penuh */
+
+}
+a{
+    text-decoration: none;
+    display: grid;
+    color: black;
+}
+
     </style>
 </head>
 <body>
-    <h1 style="font-family: sans-serif; text-align: center;margin-top: 50px;">Hallo Pelanggan ZiFood👋</h1>
+    <div class="navbar">
+        <ul>
+            <li> <a href="index.html">Home</a></li>
+            <li> <a href="">About</a></li>
+            <li><a href="">Contact</a></li>
+        </ul>
+    </div>
+    <h1 style="font-family: sans-serif; text-align: center;margin-top: 50px;">
+        Hallo Pelanggan ZiFood👋</h1>
+        <h4 style="font-family: sans-serif; text-align: center;">
+            ZiFood Restorant Berkualiatas Harga Pas</h4>
+    <h2 style="margin-top: 100px;">Di ZiFood ada apa aja sih?</h2>
     <div class="card">
   <h2>Mie Ayam</h2>
   <p>Rp 8.0000</p>
   <button>Beli</button>
+</div>
+<div class="menu1">
+    <h1>Bas Urat</h1>
+    <p>Rp 12.000</p>
+</div>
+
+<div style="box-sizing: border-box;" class="contact">
+    <h3 style="text-align: center;">Hubungi Kami</h3>
+    <input style="" type="text"placeholder="Nama">
+    <input type="text"placeholder="Pesan">
+    <br>
+    <button onclick="alert('Pesan Berhasil Di Kirim')">Kirim</button>
+
+</div>
+<div class="menu1">
+    <h1>Bas Urat</h1>
+    <p>Rp 12.000</p>
 </div>
 
     
