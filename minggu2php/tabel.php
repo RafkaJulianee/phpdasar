@@ -16,8 +16,8 @@
 </head>
 <body>
     <?php
-    echo "<h1>Tabel</h1>";
-    echo "<table border='1'>
+    echo "<h1 style=text-align:center>Tabel</h1>";
+    echo "<table border='1' style=text-align:center >
     <th>No</th>
     <th>Jumlah Sikat</th>
     <th>Harga</th></tr>";
