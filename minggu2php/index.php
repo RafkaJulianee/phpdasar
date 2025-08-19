@@ -53,6 +53,11 @@ while(!$nunggu){
     $nunggu=true;
 }
 $lapar= true;
+do{
+    echo "Aku Makan Deh..";
+    $lapar= false;
+}while($lapar);
+
 
     ?>
 </body>
