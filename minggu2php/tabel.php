@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Membuat Tabel</title>
     <body>
+        <link rel="stylesheet" href="style.css">
         <style>
           body {
 
@@ -33,6 +34,7 @@
         echo $jumlah * $harga;
         echo "</td></tr>";
         $jumlah +=10;
+
 
 
     }
