@@ -46,6 +46,12 @@ for($angka=1; $angka==100;)$angka++;{
 }
 
 
+
+$nunggu = false;
+while(!$nunggu){
+    echo "Aku Masih Menunggu Mu...<br>";
+    $nunggu=true;
+}
     ?>
 </body>
 </html>
