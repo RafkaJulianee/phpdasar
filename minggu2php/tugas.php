@@ -4,24 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tugas</title>
+    <link rel="stylesheet" href="style.css">
     <style>
           body {
 
        font-family: 'Inter', Arial, sans-serif;
     }
+   img{
+       display: block;
+       margin: 0 auto;
+       max-width: 30%;
+       height: auto;
+   }
 
+    footer {
+      margin-top: auto;
+      background:white;
+      overflow: hidden;   /* biar gak keluar area */
+      padding: 10px 0;
+    }
+
+    .track {
+      display: flex;
+      gap: 30px;
+      animation: jalan 20s linear infinite; /* durasi & loop */
+    }
+
+    footer img {
+      width: 100px;
+      border-radius: 10px;
+    }
+
+    @keyframes jalan {        
+      from { transform: translateX(100%); }  /* mulai dari kanan */
+      to   { transform: translateX(-100%); } /* jalan ke kiri */
+    }
+      
     </style>
 </head>
 <body>
-    <marquee behavior="" direction=""><strong>Php Menyenangkan🚀</strong></marquee>
-<img src="" alt="">
 
+   
+ <footer>
+    <div class="track">
+      <img src="zenitsu.gif" alt="foto2">
+      <img src="itaci.gif" alt="foto3">
+      <img src="sasuke.gif" alt="foto3">
+      <img src="bebek.gif" alt="foto3">
+
+    </div>
+  </footer>
 <?php
 
 //Buatlah Tabel Yang Menampilkan Nama 
 //dan Harga Buah Menggunakan Perulangan
 //Minimal 5 Baris
-echo "<h1 style=text-align:center>Tugas👾</h1>";
+
 echo "<table border='1' style=text-align:center >
 
  <tr style='background-color: yellow'>
@@ -29,7 +67,7 @@ echo "<table border='1' style=text-align:center >
     <th>Nama Buah</th>
     <th>Harga/Kg</th>
 </tr>";
-echo "<hr>";
+echo "<hr style='border:none; border-top:10px dashed white; background-color:black; height:10px;'>";
 echo "<h3>Tugas1</h3>";
 $buah['Apel🍎']  = 20000;
 $buah['Jeruk🍊'] = 15000;
@@ -51,6 +89,8 @@ foreach ($buah as $nama => $harga) {
 }
 echo "</table>";
 ?>
-
+<script>
+   
+</script>
 </body>
 </html>
