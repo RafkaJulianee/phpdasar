@@ -11,6 +11,8 @@
     $usiakaryawa['Matheus Cunha']=22;
     $usiakaryawa['Bernando Silva']=30;
     $usiakaryawa['Florian Wirtz']=25;
+    $usiakaryawa['Andry Shevchenko']=48;
+
     foreach ($usiakaryawa as $nama=> $umur){
         echo "Nama Pemain:$nama <br> Usia $umur th <br>";
     }
