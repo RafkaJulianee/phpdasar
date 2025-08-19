@@ -47,11 +47,13 @@ for($angka=1; $angka==100;)$angka++;{
 
 
 
-$nunggu = false;
+$nunggu =false;
 while(!$nunggu){
     echo "Aku Masih Menunggu Mu...<br>";
     $nunggu=true;
 }
+$lapar= true;
+
     ?>
 </body>
 </html>
