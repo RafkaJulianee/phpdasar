@@ -21,7 +21,7 @@
 echo "<h1 style=text-align:center>Tugas👾</h1>";
 echo "<table border='1' style=text-align:center >
 
-<tr>
+<tr st>
     <th>No</th>
     <th>Nama Buah</th>
     <th>Harga</th>
