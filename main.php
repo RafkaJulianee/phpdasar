@@ -13,6 +13,14 @@ function salam($nama){
 salam("rafka");
 salam("rafka");
 salam("rafka");
+//fuungsi dengan retrun
+function tambah($a,$b){
+    return $a+$b;
+
+}
+$hasil=tambah(5,7);
+echo "Hasil nya adalah:$hasil";
+
 
 
 
