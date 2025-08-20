@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>BioData</h2>
+    <form action="form.php" method="post">
+        <label>Nama:</label>
+        <input type="text" name="nama"><br><br>
+        <label>Alamat:</label>
+        <input type="text" name="Alamat"><br><br>
+        <label>Sekolah:</label>
+        <input type="text" name="sekolah"><br><br>
+        <label>Jurusan:</label>
+        <select name="jurusan">
+            <option value="Rekayasa Perangkat Lunak">Rekayasa Perangkat Lunak</option>
+            <option value="Teknik Komputer Dan Jaringan">Teknik Komputer Dan Jaringan</option>
+            <option value="Akutansi">Akutansi</option>
+            <option value="Teknik Otomoti">Teknik Otomotif</option>
+        </select><br><br>
+
+        <label>Jenis Kelamin:</label>
+        <input type="radio" name="jk" value="Laki-Laki">Laki-Laki
+        <input type="radio" name="jk" value="Perempuan">Perempuan <br><br>
+        <input onclick="alert('Data Berhasil Di Kirim')" type="submit" value="Kirim">
+
+
+
+
+    </form>
+
+</body>
+
+</html>
