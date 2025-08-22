@@ -5,11 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latihan Dom</title>
     <style>
-
+      body{
+        font-family: sans-serif;
+      }
+      input{
+        justify-content: center;
+        margin-top: 50px;
+      }
     </style>
 </head>
 <body>
+    <h1 style="text-align: center;">Cek Umur Yuk!</h1>
     <input type="number" id="masukanumur" placeholder="Masukan Umur Kamu">
+    <br><br>
     <button onclick="cekumur()">Cek</button>
     <p id="hasil"></p>
     <script>
@@ -20,6 +28,12 @@
             //ambil elemen hasil
             let hasil =document.getElementById("Hasil")
             //if stetmen
+            if (umur >=18){
+                hasil.innerText="Umur Kamu Sudah Mencukupi"
+            }else{
+                hasil.innerText="Belum Mencukupi Umur"
+            }
+
         }
     </script>
 </body>
