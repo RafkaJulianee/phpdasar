@@ -1,39 +1,122 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <title>DOM dengan if else</title>
+  <meta charset="UTF-8">
+  <title>Dashboard</title>
   <style>
     body {
-      background-color: white;
+      font-family: Arial, sans-serif;
       text-align: center;
-      font-family: Arial;
-      padding: 50px;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
+
+    .container {
+      background: rgba(255,255,255,0.1);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      width: 350px;
+    }
+
+    h2 { margin-bottom: 15px; }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+    }
+
     button {
+      background: #ff4081;
+      border: none;
       padding: 10px 20px;
-      font-size: 18px;
+      margin-top: 10px;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
       cursor: pointer;
+      transition: 0.3s;
     }
+
+    button:hover {
+      background: #e73370;
+    }
+
+    #dashboard { display: none; }
+    #loginMsg { color: #ff9a9a; margin-top: 8px; }
   </style>
 </head>
 <body>
-  <h1 id="judul">Halo, Selamat Datang!</h1>
-  <button onclick="ubahWarna()">Ubah Warna</button>
+  <div class="container">
+    <!-- Login Form -->
+    <div id="loginForm">
+      <h2>Login</h2>
+      <input type="text" id="logUser" placeholder="Username">
+      <input type="password" id="logPass" placeholder="Password">
+      <button onclick="login()">Masuk</button>
+      <p id="loginMsg"></p>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard">
+      <h2>Selamat Datang 🎉</h2>
+      <p id="userWelcome"></p>
+      <button onclick="logout()">Logout</button>
+    </div>
+  </div>
 
   <script>
-    function ubahWarna() {
-      let body = document.body;
-      let judul = document.getElementById("judul");
+    // Dummy akun (contoh)
+    let users = [
+      { username: "rafka", password: "12345" },
+      { username: "admin", password: "admin" }
+    ];
 
-      if (body.style.backgroundColor === "white" || body.style.backgroundColor === "") {
-        body.style.backgroundColor = "black";
-        body.style.color = "white";
-        judul.innerText = "Mode Gelap Aktif 🌙";
-      } else {
-        body.style.backgroundColor = "white";
-        body.style.color = "black";
-        judul.innerText = "Mode Terang Aktif ☀️";
+    // Cek status login pas halaman dibuka
+    window.onload = () => {
+      let loggedInUser = localStorage.getItem("loggedInUser");
+      if (loggedInUser) {
+        showDashboard(loggedInUser);
       }
+    };
+
+    // Fungsi login
+    function login() {
+      let username = document.getElementById("logUser").value;
+      let password = document.getElementById("logPass").value;
+      let loginMsg = document.getElementById("loginMsg");
+
+      let user = users.find(u => u.username === username && u.password === password);
+
+      if (user) {
+        localStorage.setItem("loggedInUser", username); // simpan ke localStorage
+        showDashboard(username);
+      } else {
+        loginMsg.textContent = "❌ Username / Password salah!";
+      }
+    }
+
+    // Tampilkan dashboard
+    function showDashboard(username) {
+      document.getElementById("loginForm").style.display = "none";
+      document.getElementById("dashboard").style.display = "block";
+      document.getElementById("userWelcome").textContent = `Halo, ${username}! 👋`;
+    }
+
+    // Logout
+    function logout() {
+      localStorage.removeItem("loggedInUser"); // hapus status login
+      document.getElementById("dashboard").style.display = "none";
+      document.getElementById("loginForm").style.display = "block";
     }
   </script>
 </body>
