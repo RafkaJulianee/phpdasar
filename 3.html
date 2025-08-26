@@ -14,6 +14,20 @@
     <button type="submit">Kirim</button>
 </form>
 
+<script>
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        const nama = form.nama.value;
+        const nilai = form.nilai.value;
+
+        if (!nama || !nilai) {
+            alert('Semua field harus diisi!');
+            event.preventDefault();
+        }
+    });
+</script>
+
+
     
 </body>
 </html>
