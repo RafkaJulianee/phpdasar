@@ -59,9 +59,9 @@
         @keyframes zoomIn{
             from{ transform: scale(0.7);opacity: 0;}
             to {transform: scale(1);opacity: 1;}
-
+ 
         }
-        
+
     </style>
 </head>
 <body>
@@ -77,5 +77,34 @@
         <span class="close" id="closeBtn">$times;</span>
         <img id="modalimg">
     </div>
+    <script>
+         const modal = document.getElementById("modal");
+    // Ambil elemen gambar di modal
+    const modalImg = document.getElementById("modalimg");
+    // Ambil tombol close (X)
+    const closeBtn = document.getElementById("closeBtn");
+    // Ambil semua gambar dalam gallery
+    const images = document.querySelectorAll(".gallery img");
+
+    // Tambahkan event listener untuk setiap gambar
+    images.forEach(img => {
+      img.addEventListener("click", () => { // Saat gambar diklik
+        modal.style.display = "flex"; // Tampilkan modal
+        modalImg.src = img.src; // Ganti src modal dengan gambar yang diklik
+      });
+    });
+
+    // Event saat tombol close ditekan
+    closeBtn.addEventListener("click", () => {
+      modal.style.display = "none"; // Sembunyikan modal
+    });
+
+    // Event saat klik di luar gambar (area hitam)
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) { // Jika target klik adalah modal (bukan gambar)
+        modal.style.display = "none"; // Tutup modal
+      }
+    });
+    </script>
 </body>
 </html>
