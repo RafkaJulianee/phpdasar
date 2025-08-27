@@ -19,8 +19,20 @@
         .gallery{
             display: grid;
             grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
-            
+            gap: 15px;     
+            width: 90%;
+            max-width: 1000px;
+        }
+        .gallery img{
+            width: 100%;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: transfrom 0.3s ease;
 
+        }
+        .gallery img:hover{
+            transform: scale(1.05);
+            
         }
     </style>
 </head>
