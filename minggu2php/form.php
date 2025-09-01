@@ -49,7 +49,7 @@ $jk=$_POST['jk'];
     <p>Nama: <?=$nama; ?></p>
     <p>Kelas: <?=$kelas; ?></p>
     <p>jenis Kelamin: <?=$jk; ?></p>
-    <p>alamat: <?=$alamat; ?></p>
+    <p>Alamat: <?=$alamat; ?></p>
     <p>No Hp: <?=$nohp; ?></p>
 
 
