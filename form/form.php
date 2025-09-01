@@ -7,7 +7,7 @@ $nohp   = $_POST['nohp'];
 $jk     = $_POST['jk'];
 
 // Data untuk QR
-$dataQR = "NIS: $nis | Nama: $nama | Kelas: $kelas | JK: $jk | Alamat: $alamat | HP: $nohp";
+$dataQR = "NIS: $nis | Nama: $nama | Kelas: $kelas | JenisKelamin: $jk | Alamat: $alamat | HP: $nohp";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,11 +23,11 @@ $dataQR = "NIS: $nis | Nama: $nama | Kelas: $kelas | JK: $jk | Alamat: $alamat |
     .container {
       display: flex;
       justify-content: flex-start;
-      align-items: center;   /* QR sejajar tengah biodata */
+      align-items: center;   
       gap: 40px;
     }
     .biodata {
-      width: 350px;          /* batasi panjang kolom */
+      width: 350px;        
     }
     .biodata p {
       margin: 5px 0;
@@ -37,7 +37,7 @@ $dataQR = "NIS: $nis | Nama: $nama | Kelas: $kelas | JK: $jk | Alamat: $alamat |
       background: #f9f9f9;
     }
     .qr-code img {
-      width: 180px;          /* ukuran QR otomatis */
+      width: 180px;        
       border: 1px solid #ccc;
       border-radius: 5px;
       padding: 10px;
