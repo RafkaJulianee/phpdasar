@@ -1,8 +1,9 @@
 <?php
+$nis=$_POST['nis'];
 $nama=$_POST['nama'];
-$alamat=$_POST['Alamat'];
-$sekolah=$_POST['sekolah'];
-$jurusan=$_POST['jurusan'];
+$kelas=$_POST['kelas'];
+$alamat=$_POST['alamat'];
+$nohp=$_POST['nohp'];
 $jk=$_POST['jk'];
 ?>
 <!DOCTYPE html>
@@ -19,12 +20,14 @@ $jk=$_POST['jk'];
 </head>
 <body>
     <h2>Biodata Kamu</h2>
+    <p>NIS: <?=$nis; ?></p>
     <p>Nama: <?=$nama; ?></p>
-    <p>Alamat: <?=$alamat; ?></p>
-    <p>Sekolah: <?=$sekolah; ?></p>
-    <p>jurusan: <?=$jurusan; ?></p>
-
+    <p>Kelas: <?=$kelas; ?></p>
     <p>jenis Kelamin: <?=$jk; ?></p>
+    <p>alamat: <?=$alamat; ?></p>
+    <p>No Hp: <?=$nohp; ?></p>
+
+
     <br>
   <button type="button" onclick="history.back()">Kembali</button>
 </html>
