@@ -13,9 +13,34 @@ $jk=$_POST['jk'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        body{
-              font-family: sans-serif;
+        body {
+    
+         font-family: 'Inter', Arial, sans-serif;
         }
+        p{
+            margin: 5px 0;
+            line-height: 1.5;
+            color: #333;
+            text-align: justify;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+        button {
+            background-color: blue;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+
     </style>
 </head>
 <body>
