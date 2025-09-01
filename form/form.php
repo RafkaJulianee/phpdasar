@@ -1,59 +1,79 @@
 <?php
-$nis=$_POST['nis'];
-$nama=$_POST['nama'];
-$kelas=$_POST['kelas'];
-$alamat=$_POST['alamat'];
-$nohp=$_POST['nohp'];
-$jk=$_POST['jk'];
+$nis    = $_POST['nis'];
+$nama   = $_POST['nama'];
+$kelas  = $_POST['kelas'];
+$alamat = $_POST['alamat'];
+$nohp   = $_POST['nohp'];
+$jk     = $_POST['jk'];
+
+// Data untuk QR
+$dataQR = "NIS: $nis | Nama: $nama | Kelas: $kelas | JK: $jk | Alamat: $alamat | HP: $nohp";
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biodata</title>
-        <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
-    <style>
-        body {
-    
-         font-family: 'Inter', Arial, sans-serif;
-        }
-        p{
-            margin: 5px 0;
-            line-height: 1.5;
-            color: #333;
-            text-align: justify;
-            padding: 10px 15px;
-            border: 1px solid #eee;
-            border-radius: 5px;
-        }
-        button {
-            background-color: blue;
-            border: none;
-            color: white;
-            padding: 10px 20px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-
-    </style>
+  <meta charset="UTF-8">
+  <title>Biodata</title>
+    <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;   /* QR sejajar tengah biodata */
+      gap: 40px;
+    }
+    .biodata {
+      width: 350px;          /* batasi panjang kolom */
+    }
+    .biodata p {
+      margin: 5px 0;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      background: #f9f9f9;
+    }
+    .qr-code img {
+      width: 180px;          /* ukuran QR otomatis */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      background: #fff;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      background: blue;
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-    <h2>Biodata Kamu</h2>
-    <p>NIS: <?=$nis; ?></p>
-    <p>Nama: <?=$nama; ?></p>
-    <p>Kelas: <?=$kelas; ?></p>
-    <p>jenis Kelamin: <?=$jk; ?></p>
-    <p>Alamat: <?=$alamat; ?></p>
-    <p>No Hp: <?=$nohp; ?></p>
 
+  <div class="container">
+    <!-- Biodata -->
+    <div class="biodata">
+      <h2>Biodata Kamu</h2>
+      <p>NIS: <?=$nis;?></p>
+      <p>Nama: <?=$nama;?></p>
+      <p>Kelas: <?=$kelas;?></p>
+      <p>Jenis Kelamin: <?=$jk;?></p>
+      <p>Alamat: <?=$alamat;?></p>
+      <p>No HP: <?=$nohp;?></p>
+      <button type="button" onclick="history.back()">Kembali</button>
+    </div>
 
-    <br>
-  <button type="button" onclick="history.back()">Kembali</button>
+    <!-- QR Code -->
+    <div class="qr-code">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=<?=urlencode($dataQR);?>" alt="QR Code">
+    </div>
+  </div>
+
+</body>
 </html>
