@@ -1,334 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Love letter for crush</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap"
-      rel="stylesheet" />
-    <link rel="stylesheet" href="love letter 2.css" />
-  <style type="text/css" media="all">
-    #envelope {
-  position: relative;
-  width: 280px;
-  height: 180px;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  margin-left: auto;
-  margin-right: auto;
-  top: 150px;
-  background-color: #d9534f; /* Warm romantic red */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-}
-
-.front {
-  position: absolute;
-  width: 0;
-  height: 0;
-  z-index: 3;
-}
-
-.flap {
-  border-left: 140px solid transparent;
-  border-right: 140px solid transparent;
-  border-bottom: 82px solid transparent;
-  /* a little smaller */
-  border-top: 98px solid #d9534f;
-  /* a little larger */
-  transform-origin: top;
-  pointer-events: none;
-}
-
-.pocket {
-  border-left: 140px solid #f5a3a2; /* Soft pinkish red for the pocket */
-  border-right: 140px solid #f5a3a2;
-  border-bottom: 90px solid #ff6f61; /* Lighter romantic red */
-  border-top: 90px solid transparent;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-.letter {
-  position: relative;
-  background-color: #fff;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  height: 90%;
-  top: 5%;
-  border-radius: 6px;
-  box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
-  font-family: "Dancing Script", cursive;
-}
-
-.letter:after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
-.words {
-  position: absolute;
-  left: 10%;
-  width: 80%;
-  height: 14%;
-  background-color: #ffe6e6; /* Light romantic tone */
-}
-
-.words.line1 {
-  top: 10%;
-  font-size: 0.5rem;
-  width: 20%;
-  height: 7%;
-  font-size: 0.7rem;
-}
-
-.words.line2 {
-  top: 30%;
-  text-align: center;
-  font-size: 1.1rem;
-}
-
-.words.line3 {
-  top: 50%;
-  font-size: 1.1rem;
-  text-align: center;
-}
-
-.words.line4 {
-  top: 70%;
-  font-size: 1.1rem;
-  text-align: center;
-}
-
-.open .flap {
-  transform: rotateX(180deg);
-  transition: transform 0.4s ease, z-index 0.6s;
-  z-index: 1;
-}
-
-.close .flap {
-  transform: rotateX(0deg);
-  transition: transform 0.4s 0.6s ease, z-index 1s;
-  z-index: 5;
-}
-
-.close .letter {
-  transform: translateY(0px);
-  transition: transform 0.4s ease, z-index 1s;
-  z-index: 1;
-}
-
-.open .letter {
-  transform: translateY(-100px);
-  transition: transform 0.4s 0.6s ease, z-index 0.6s;
-  z-index: 2;
-}
-
-.hearts {
-  position: absolute;
-  top: 90px;
-  left: 0;
-  right: 0;
-  z-index: 2;
-}
-
-.heart {
-  position: absolute;
-  bottom: 0;
-  right: 10%;
-  pointer-events: none;
-}
-
-.heart:before,
-.heart:after {
-  position: absolute;
-  content: "";
-  left: 50px;
-  top: 0;
-  width: 50px;
-  height: 80px;
-  background: #e60073; /* Deep romantic pink */
-  border-radius: 50px 50px 0 0;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-  pointer-events: none;
-}
-
-.heart:after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-}
-
-.close .heart {
-  opacity: 0;
-  -webkit-animation: none;
-  animation: none;
-}
-
-.a1 {
-  left: 20%;
-  transform: scale(0.6);
-  opacity: 1;
-  -webkit-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
-  -moz-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 0.7s;
-  animation-delay: 0.7s;
-}
-
-.a2 {
-  left: 55%;
-  transform: scale(1);
-  opacity: 1;
-  -webkit-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
-  -moz-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 0.7s;
-  animation-delay: 0.7s;
-}
-
-.a3 {
-  left: 10%;
-  transform: scale(0.8);
-  opacity: 1;
-  -webkit-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
-  -moz-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
-  -webkit-animation-fill-mode: forwards;
-  animation-fill-mode: forwards;
-  -webkit-animation-delay: 0.7s;
-  animation-delay: 0.7s;
-}
-
-@-webkit-keyframes slideUp {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: -600px;
-  }
-}
-@keyframes slideUp {
-  0% {
-    top: 0;
-  }
-  100% {
-    top: -600px;
-  }
-}
-@-webkit-keyframes sideSway {
-  0% {
-    margin-left: 0px;
-  }
-  100% {
-    margin-left: 50px;
-  }
-}
-@keyframes sideSway {
-  0% {
-    margin-left: 0px;
-  }
-  100% {
-    margin-left: 50px;
-  }
-}
-body {
-  background-color: #f0e6f6; /* Soft lavender for a romantic, dreamy feel */
-}
-
-.envlope-wrapper {
-  height: 380px;
-}
-
-.reset {
-  text-align: center;
-}
-
-.reset button {
-  font-weight: 800;
-  font-style: normal;
-  transition: all 0.1s linear;
-  -webkit-appearance: none;
-  background-color: transparent;
-  border: solid 2px #d9534f;
-  border-radius: 4px;
-  color: #d9534f;
-  display: inline-block;
-  font-size: 14px;
-  text-transform: uppercase;
-  margin: 5px;
-  padding: 10px;
-  line-height: 1em;
-  text-decoration: none;
-  min-width: 120px;
-  cursor: pointer;
-}
-
-.reset button:hover {
-  background-color: #d9534f;
-  color: #fff;
-}
-
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      font-family: sans-serif;
+    }
   </style>
-  </head>
-  <body>
-    <!-- tiktok meowish -->
-    <div class="envlope-wrapper">
-      <div id="envelope" class="close">
-        <div class="front flap"></div>
-        <div class="front pocket"></div>
-        <div class="letter">
-          <div class="words line1">To: You</div>
-          <div class="words line2">Terimakasih Telah Mengunjungi Website kami</div>
-          <div class="words line3">That every time i see you</div>
-          <div class="words line4">my world stops,</div>
-        </div>
-        <div class="hearts">
-          <div class="heart a1"></div>
-          <div class="heart a2"></div>
-          <div class="heart a3"></div>
-        </div>
-      </div>
-    </div>
-    <div class="reset">
-      <button id="open">Open</button>
-      <button id="reset">Close</button>
-    </div>
+</head>
+<body>
+  <script>
+     // //menghitung luas perseg
+        // //rumus l= sisi*sisi
+        // var sisi = 10
+        // var luas = sisi * sisi;
+        // document.write("Luas Persegi Panjang " 
+        // + "=" + luas)
+        //menghitung luas lingkaran
+        // rumus l = phi*r*r dengan jari jari 2=2.3
+        // menghitung luas lingkaran
+        var r = 2.3;
+        var phi = 3.14;
+        var luas = phi * r * r;
+        document.write("1.Luas Lingkaran = " + luas);
+        document.write("<br>");
+        document.write("<br>");
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="love letter 2.js"></script>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function () {
-  var envelope = $("#envelope");
-  var btn_open = $("#open");
-  var btn_reset = $("#reset");
-
-  envelope.click(function () {
-    open();
-  });
-  btn_open.click(function () {
-    open();
-  });
-  btn_reset.click(function () {
-    close();
-  });
-
-  function open() {
-    envelope.addClass("open").removeClass("close");
-  }
-  function close() {
-    envelope.addClass("close").removeClass("open");
-  }
-});
-
-    </script>
-  </body>
+        //menghitung nilai rata rata dari kumpulan nilai berikut
+        //2.3 3.4 4.5 6.7 7.8 8.9 9.10 10.1
+        var jumlah = 2.3 + 3.4 + 4.5 + 6.7 + 7.8 
+                    + 8.9 + 9.10 + 10.1
+        var rata = jumlah / 8
+        document.write("2.Rata-rata = " + rata)
+  </script>
+</body>
 </html>

@@ -4,17 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar JS</title>
+    <title>Document</title>
     <style>
         body {
             font-family: sans-serif;
+        }
+
+        img {
+            width: 10%;
         }
     </style>
 </head>
 
 <body>
-    <marquee behavior="" direction="">Hello JavaScript</marquee>
-   <script src="script.js"></script>
+    <marquee behavior="" direction=""><b>Hello JavaScript</b></marquee>
+    <img src="bear.gif" alt="">
+
+    <hr>
+    <input type="text" name="" id="" >
+
+<br><br>
+
+    <script>                                                                                                            
+        // //menghitung luas perseg
+        // //rumus l= sisi*sisi
+        // var sisi = 10
+        // var luas = sisi * sisi;
+        // document.write("Luas Persegi Panjang " 
+        // + "=" + luas)
+        //menghitung luas lingkaran
+        // rumus l = phi*r*r dengan jari jari 2=2.3
+        // menghitung luas lingkaran
+        var r = 2.3;
+        var phi = 3.14;
+        var luas = phi * r * r;
+        document.write("1.Luas Lingkaran = " + luas);
+        document.write("<br>");
+        document.write("<br>");
+
+        //menghitung nilai rata rata dari kumpulan nilai berikut
+        //2.3 3.4 4.5 6.7 7.8 8.9 9.10 10.1
+        var jumlah = 2.3 + 3.4 + 4.5 + 6.7 + 7.8
+            + 8.9 + 9.10 + 10.1
+        var rata = jumlah / 8
+        document.writeln("2.Rata-rata = " + rata)
+
+        //function javascript
+        document.write("<h2>Function</h2>");
+
+        function sapa(nama) {
+            document.write("Haloo," + nama)
+        }
+        sapa("Rafka <br>")
+        sapa("Julian")
+    </script>
 </body>
 
 </html>
