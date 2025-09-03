@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Counter App React</title>
+
+  <!-- React & ReactDOM dari CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Babel agar bisa pakai JSX -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <!-- Piring kosong tempat React naruh UI -->
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // 🔹 1. Bikin komponen App (kayak resep bikin kue)
+    function App() {
+      // 🔹 2. State = data yang bisa berubah
+      // count = isi data
+      // setCount = alat buat ubah data
+      const [count, setCount] = React.useState(0);
+
+      // 🔹 3. Return = hasil UI yang ditampilkan
+      return (
+        <div style={{ textAlign: "center", marginTop: "50px" }}>
+          <h1>Counter App 🚀</h1>
+          <h2>{count}</h2> {/* Menampilkan angka dari state */}
+
+          {/* Tombol - untuk mengurangi angka */}
+          <button onClick={() => setCount(count - 1)} style={{ margin: "5px" }}>
+            -
+          </button>
+
+          {/* Tombol + untuk menambah angka */}
+          <button onClick={() => setCount(count + 1)} style={{ margin: "5px" }}>
+            +
+          </button>
+        </div>
+      );
+    }
+
+    // 🔹 4. Ambil piring kosong (root)
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+
+    // 🔹 5. Sajikan kue (komponen App) ke piring
+    root.render(<App />);
+  </script>
+</body>
+</html>
