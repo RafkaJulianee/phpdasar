@@ -5,3 +5,26 @@ h1{
     text-align: center;
     margin-top: 150px;
 }
+.card {
+  width: 250px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  padding: 16px;
+  text-align: center;
+}
+
+.card-img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.card-btn {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  background: dodgerblue;
+  color: white;
+  cursor: pointer;
+}
