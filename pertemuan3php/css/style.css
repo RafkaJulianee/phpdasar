@@ -30,3 +30,14 @@
         border-radius: 16px;
      
     }
+
+    .form{
+        text-align: center;
+        padding: 40px;
+    }
+    .form input{
+        
+    }
+    h3{
+        text-align: center;
+    }
