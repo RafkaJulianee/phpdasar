@@ -26,7 +26,7 @@
          <h3>Method POST Learn</h3>
          <div class="form">
          <form action="data.php"method="post" >
-            <label for="">Username</label>
+            <label for="">Name:</label>
             <input type="text" placeholder="Nama Anda">
             <br><br>
             <label for="">Nilai:</label>
