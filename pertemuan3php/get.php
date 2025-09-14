@@ -24,7 +24,12 @@
     <div class="container">
         <div class="card1">
          <h3>Method POST Learn</h3>
-        </div>
+         <form action="data.php"method="post" >
+            <label for="">Username</label>
+            <input type="text" placeholder="Nama Anda">
+         </form>
+       
+       
     </div>
 
     
