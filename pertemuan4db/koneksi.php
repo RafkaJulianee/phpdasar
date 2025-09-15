@@ -2,17 +2,15 @@
 $host = "localhost";
 $user = "root";
 $pass = "";
-$db   = "db_siswa";
+$db   = "db_siswarpl1"; // nama database kamu
 
-// coba konek
+// koneksi
 $conn = mysqli_connect($host, $user, $pass, $db);
 
 if (!$conn) {
-    // kalau gagal
-    echo "Koneksi GAGAL: " . mysqli_connect_error();
+    die("Koneksi GAGAL: " . mysqli_connect_error());
 } else {
-    // kalau berhasil
-    echo "Berhasil🚀";
+    // biar keliatan di console (debug aja)
+    echo "<!-- Koneksi BERHASIL ke db_siswarpl1 -->";
 }
-mysqli_close($conn);
 ?>
