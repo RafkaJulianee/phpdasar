@@ -10,14 +10,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $alamat = $_POST['alamat'];
     $nohp   = $_POST['nohp'];
 
-    $query = "INSERT INTO siswa (nis, nama, kelas, jenis_kelamin, alamat, no_hp) 
-              VALUES ('$nis', '$nama', '$kelas', '$jk', '$alamat', '$nohp')";
-    $result = mysqli_query($conn, $query);
-
-    if ($result) {
-        echo "<script>alert('Data berhasil ditambahkan!'); window.location='index.php';</script>";
+    // Cek apakah NIS sudah ada
+    $cek = mysqli_query($conn, "SELECT * FROM siswa WHERE nis='$nis'");
+    if (mysqli_num_rows($cek) > 0) {
+        echo "<script>alert('NIS sudah ada, silakan gunakan yang lain!'); window.location='tambah.php';</script>";
     } else {
-        echo "<script>alert('Gagal menambahkan data!');</script>";
+        $query = "INSERT INTO siswa (nis, nama, kelas, jenis_kelamin, alamat, no_hp) 
+                  VALUES ('$nis', '$nama', '$kelas', '$jk', '$alamat', '$nohp')";
+        $result = mysqli_query($conn, $query);
+
+        if ($result) {
+            echo "<script>alert('Data berhasil ditambahkan!'); window.location='index.php';</script>";
+        } else {
+            echo "<script>alert('Gagal menambahkan data: " . mysqli_error($conn) . "');</script>";
+        }
     }
 }
 ?>
@@ -29,22 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tambah Data Siswa</title>
   <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-
   <style>
     body {
          font-family: "Montserrat", sans-serif;
          margin: 20px;
     }
-
     label {
       display: inline-block;
       width: 120px;
       margin-bottom: 10px;
     }
-
     input[type="text"],
     input[type="number"],
     select {
@@ -54,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       border-radius: 4px;
       width: 250px;
     }
-
     input[type="submit"] {
       background-color: blue;
       border: none;
@@ -65,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       cursor: pointer;
       border-radius: 5px;
     }
-
     a {
       text-decoration: none;
       color: blue;
@@ -130,37 +129,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         alert("NIS harus diisi!");
         return false;
       }
-
       var nama = document.getElementById("nama").value;
       if (nama == "") {
         alert("Nama harus diisi!");
         return false;
       }
-
       var kelas = document.getElementById("kelas").value;
       if (kelas == "") {
         alert("Kelas harus dipilih!");
         return false;
       }
-
       var jk = document.querySelector('input[name="jk"]:checked');
       if (!jk) {
         alert("Jenis Kelamin harus dipilih!");
         return false;
       }
-
       var alamat = document.getElementById("alamat").value;
       if (alamat == "") {
         alert("Alamat harus diisi!");
         return false;
       }
-
       var nohp = document.getElementById("nohp").value;
       if (nohp == "") {
         alert("No HP harus diisi!");
         return false;
       }
-
       return true;
     }
   </script>

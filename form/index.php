@@ -15,11 +15,13 @@ include "koneksi.php";
       body{
         font-family: "Montserrat";
       }
+    
     </style>
   </head>
   <body>
     <div class="container">
      <h2 class="my-3">Data Siswa XI-RPL 1</h2>
+
 
      <!-- Tombol Tambah Data -->
      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
