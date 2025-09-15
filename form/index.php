@@ -1,3 +1,6 @@
+<?php 
+include "koneksi.php"; 
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,21 +9,23 @@
     <title>Data Siswa</title>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="shortcut icon" href="img/profil1.png" type="image/x-icon">
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-   <style>
-    body{
-      font-family: "Montserrat";
-    }
-   </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+      body{
+        font-family: "Montserrat";
+      }
+    </style>
   </head>
   <body>
     <div class="container">
-     <h2>Data Siswa XI-RPL 1</h2>
+     <h2 class="my-3">Data Siswa XI-RPL 1</h2>
+
+     <!-- Tombol Tambah Data -->
+     <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
+
      <table class="table">
-        <thead>
+        <thead class="table-blue">
             <tr>
                 <th>No</th>
                 <th>NIS</th>
@@ -29,16 +34,15 @@
                 <th>Jenis Kelamin</th>
                 <th>Alamat</th>
                 <th>No Hp</th>
-
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            include "koneksi.php";
             $no=1;
             $query = mysqli_query($conn, "SELECT * FROM siswa");
             while($row=mysqli_fetch_assoc($query)){
-                 ?>
+            ?>
                  <tr>
                     <td><?=$no++;?></td>
                     <td><?=$row['nis'];?></td>
@@ -47,17 +51,15 @@
                     <td><?=$row['jenis_kelamin'];?></td>
                     <td><?=$row['alamat'];?></td>
                     <td><?=$row['no_hp'];?></td>
+                    <td>
+                        <a href="edit.php?nis=<?=$row['nis'];?>" class="btn btn-sm btn-warning">Edit</a>
+                        <a href="hapus.php?nis=<?=$row['nis'];?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+                    </td>
                  </tr>
-
-            <?php
-            
-        }
-              ?>
-       
+            <?php } ?>
         </tbody>
-
      </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
