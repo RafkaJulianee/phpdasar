@@ -20,17 +20,17 @@ $data = mysqli_fetch_assoc($query);
 
 // Update data setelah form disubmit
 if (isset($_POST['update'])) {
-    $nama       = $_POST['nama'];
-    $kelas      = $_POST['kelas'];
-    $jenis      = $_POST['jenis_kelamin'];
-    $alamat     = $_POST['alamat'];
-    $no_hp      = $_POST['no_hp'];
+    $nama   = $_POST['nama'];
+    $kelas  = $_POST['kelas'];
+    $jenis  = $_POST['jk'];
+    $alamat = $_POST['alamat'];
+    $no_hp  = $_POST['nohp'];
 
     $update = mysqli_query($conn, "UPDATE siswa SET 
-        nama='$nama', 
-        kelas='$kelas', 
-        jenis_kelamin='$jenis', 
-        alamat='$alamat', 
+        nama='$nama',
+        kelas='$kelas',
+        jenis_kelamin='$jenis',
+        alamat='$alamat',
         no_hp='$no_hp'
         WHERE nis='$nis'
     ");
@@ -42,71 +42,95 @@ if (isset($_POST['update'])) {
     }
 }
 ?>
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Siswa</title>
-    <style>
-      body {
-        font-family: "Montserrat", sans-serif;
-        padding: 20px;
-      }
-      .form-container {
-        max-width: 500px;
-        margin: auto;
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 10px;
-      }
-      input, select, textarea {
-        width: 100%;
-        padding: 8px;
-        margin: 5px 0 15px 0;
-        border-radius: 6px;
-        border: 1px solid #ccc;
-      }
-      button {
-        background: #007bff;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 6px;
-        cursor: pointer;
-      }
-      button:hover {
-        background: #0056b3;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="form-container">
-      <h2>Edit Data Siswa</h2>
-      <form method="POST">
-        <label>NIS</label>
-        <input type="text" name="nis" value="<?=$data['nis'];?>" readonly>
+<!DOCTYPE html>
+<html lang="id">
 
-        <label>Nama</label>
-        <input type="text" name="nama" value="<?=$data['nama'];?>" required>
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Data Siswa</title>
+  <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: "Montserrat", sans-serif;
+      margin: 20px;
+    }
+    label {
+      display: inline-block;
+      width: 120px;
+      margin-bottom: 10px;
+    }
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      padding: 5px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 250px;
+    }
+    input[type="submit"] {
+      background-color: blue;
+      border: none;
+      color: white;
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    a {
+      text-decoration: none;
+      color: blue;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+  </style>
+</head>
 
-        <label>Kelas</label>
-        <input type="text" name="kelas" value="<?=$data['kelas'];?>" required>
+<body>
+  <h2>Edit Data Siswa</h2>
+  <form method="POST">
+    <label>NIS:</label>
+    <input type="number" name="nis" value="<?=$data['nis'];?>" readonly><br><br>
 
-        <label>Jenis Kelamin</label>
-        <select name="jenis_kelamin" required>
-          <option value="Laki Laki" <?=$data['jenis_kelamin']=="Laki Laki"?"selected":"";?>>Laki Laki</option>
-          <option value="Perempuan" <?=$data['jenis_kelamin']=="Perempuan"?"selected":"";?>>Perempuan</option>
-        </select>
+    <label>Nama:</label>
+    <input type="text" name="nama" value="<?=$data['nama'];?>" required><br><br>
 
-        <label>Alamat</label>
-        <textarea name="alamat" required><?=$data['alamat'];?></textarea>
+    <label>Kelas:</label>
+    <select name="kelas" required>
+      <option value="">Pilih Kelas</option>
+      <option value="XI-RPL1" <?=$data['kelas']=="XI-RPL1"?"selected":"";?>>XI-RPL1</option>
+      <option value="XI-RPL2" <?=$data['kelas']=="XI-RPL2"?"selected":"";?>>XI-RPL2</option>
+      <option value="XI-GIM" <?=$data['kelas']=="XI-GIM"?"selected":"";?>>XI-GIM</option>
+      <option value="XI-TKJT 1" <?=$data['kelas']=="XI-TKJT 1"?"selected":"";?>>XI-TKJT 1</option>
+      <option value="XI-TKJT 2" <?=$data['kelas']=="XI-TKJT 2"?"selected":"";?>>XI-TKJT 2</option>
+      <option value="XI-TKJT 3" <?=$data['kelas']=="XI-TKJT 3"?"selected":"";?>>XI-TKJT 3</option>
+      <option value="XI-TO 1" <?=$data['kelas']=="XI-TO 1"?"selected":"";?>>XI-TO 1</option>
+      <option value="XI-TO 2" <?=$data['kelas']=="XI-TO 2"?"selected":"";?>>XI-TO 2</option>
+      <option value="XI-TO 3" <?=$data['kelas']=="XI-TO 3"?"selected":"";?>>XI-TO 3</option>
+      <option value="XI-AKL 1" <?=$data['kelas']=="XI-AKL 1"?"selected":"";?>>XI-AKL 1</option>
+      <option value="XI-AKL 2" <?=$data['kelas']=="XI-AKL 2"?"selected":"";?>>XI-AKL 2</option>
+      <option value="XI-MP 1" <?=$data['kelas']=="XI-MP 1"?"selected":"";?>>XI-MP 1</option>
+      <option value="XI-MP 2" <?=$data['kelas']=="XI-MP 2"?"selected":"";?>>XI-MP 2</option>
+      <option value="XI-SP 1" <?=$data['kelas']=="XI-SP 1"?"selected":"";?>>XI-SP 1</option>
+      <option value="XI-SP 2" <?=$data['kelas']=="XI-SP 2"?"selected":"";?>>XI-SP 2</option>
+    </select><br><br>
 
-        <label>No HP</label>
-        <input type="text" name="no_hp" value="<?=$data['no_hp'];?>" required>
+    <label>Jenis Kelamin:</label>
+    <input type="radio" name="jk" value="Laki-Laki" <?=$data['jenis_kelamin']=="Laki-Laki"?"checked":"";?>>Laki-Laki
+    <input type="radio" name="jk" value="Perempuan" <?=$data['jenis_kelamin']=="Perempuan"?"checked":"";?>>Perempuan
+    <br><br>
 
-        <button type="submit" name="update">Update</button>
-      </form>
-    </div>
-  </body>
+    <label>Alamat:</label>
+    <input type="text" name="alamat" value="<?=$data['alamat'];?>" required><br><br>
+
+    <label>No Hp:</label>
+    <input type="number" name="nohp" value="<?=$data['no_hp'];?>" required><br><br>
+
+    <input type="submit" name="update" value="Update">
+    <a href="index.php">Kembali</a>
+  </form>
+</body>
 </html>

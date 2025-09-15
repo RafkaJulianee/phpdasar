@@ -54,8 +54,8 @@ include "koneksi.php";
                     <td><?=$row['alamat'];?></td>
                     <td><?=$row['no_hp'];?></td>
                     <td>
-                        <a href="edit.php?nis=<?=$row['nis'];?>" class="btn btn-sm btn-warning">Edit</a>
-                        <a href="hapus.php?nis=<?=$row['nis'];?>" class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+                        <a class="btn" style="color:green;" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
+                        <a class="btn" style="color:red;" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
                     </td>
                  </tr>
             <?php } ?>
