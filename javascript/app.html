@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,5 +32,91 @@ heroes.forEach(hero => {
 
 
 
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Daftar Siswa</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .card {
+      border: 1px solid #ccc; 
+      padding: 10px; 
+      margin: 5px; 
+      border-radius: 8px;
+    }
+    .card h3 { margin: 0; }
+  </style>
+</head>
+<body>
+  <h1>📚 Daftar Siswa</h1>
+
+  <!-- Form untuk nambah siswa -->
+  <form id="formSiswa">
+    <input type="text" id="nama" placeholder="Nama siswa" required>
+    <input type="number" id="umur" placeholder="Umur" required>
+    <input type="text" id="kelas" placeholder="Kelas" required>
+    <button type="submit">Tambah</button>
+  </form>
+
+  <hr>
+
+  <!-- Tempat tampil daftar siswa -->
+  <div id="listSiswa"></div>
+
+  <script>
+    // Array of Object (data awal siswa)
+    let siswa = [
+      { nama: "Budi", umur: 17, kelas: "X RPL 1" },
+      { nama: "Ani", umur: 16, kelas: "X RPL 2" }
+    ];
+
+    // Fungsi untuk render data ke HTML
+    function renderSiswa() {
+      let list = document.getElementById("listSiswa");
+      list.innerHTML = ""; // kosongin dulu biar ga double
+
+      siswa.forEach((s, index) => {
+        let card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${s.nama}</h3>
+          <p>Umur: ${s.umur}</p>
+          <p>Kelas: ${s.kelas}</p>
+          <button onclick="hapusSiswa(${index})">Hapus</button>
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // Fungsi tambah siswa lewat form
+    document.getElementById("formSiswa").addEventListener("submit", function(e) {
+      e.preventDefault(); // biar ga reload
+      let nama = document.getElementById("nama").value;
+      let umur = document.getElementById("umur").value;
+      let kelas = document.getElementById("kelas").value;
+
+      // push object baru ke array siswa
+      siswa.push({ nama, umur, kelas });
+
+      // render ulang
+      renderSiswa();
+
+      // reset form
+      this.reset();
+    });
+
+    // Fungsi hapus siswa
+    function hapusSiswa(index) {
+      siswa.splice(index, 1); // hapus berdasarkan index
+      renderSiswa(); // render ulang
+    }
+
+    // panggil sekali biar data awal muncul
+    renderSiswa();
+  </script>
 </body>
 </html>
