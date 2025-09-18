@@ -3,22 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    body{
-      font-family: sans-serif;
-    }
-  </style>
+  <title>Belajar OOP di Web</title>
 </head>
 <body>
-  <img src="profil1.png" width="100" onmouseover="alert('Kucing Imut!')">
-  <input type="text" oninput="console.log(this.value)">
-  <h1>hello World</h1>
-  <p>I'm Rafka Julian Pratama</p>
+  <h1>OOP + Fitur Web</h1>
 
-  <p>yayayay</p>
+  <!-- Input username -->
+  <input type="text" id="username" placeholder="Masukkan username">
+  <button id="loginBtn">Login</button>
 
+  <!-- Tempat tampil user -->
+  <p id="userInfo"></p>
 
+  <script>
+    // ===============================
+// 1. Bikin class User
+// ===============================
+class User {
+  constructor(nama) {
+    this.nama = nama; // property = identitas user
+  }
 
+  // method = aksi user
+  login() {
+    return `Selamat datang, ${this.nama}!`; 
+    // analogi: user ini bisa ngomong pas login
+  }
+}
+
+// ===============================
+// 2. Hubungkan ke fitur web (DOM)
+// ===============================
+
+// ambil elemen HTML
+const loginBtn = document.getElementById("loginBtn");
+const usernameInput = document.getElementById("username");
+const userInfo = document.getElementById("userInfo");
+
+// event saat tombol login diklik
+loginBtn.addEventListener("click", () => {
+  const nama = usernameInput.value.trim(); // ambil input user
+
+  if (nama) {
+    // bikin object baru dari class User
+    const user = new User(nama);
+
+    // tampilkan hasil login di web
+    userInfo.textContent = user.login();
+    
+    // reset input
+    usernameInput.value = "";
+  } else {
+    alert("Username tidak boleh kosong!"); 
+    // kalau kosong, kasih warning
+  }
+});
+
+  </script>
 </body>
 </html>
