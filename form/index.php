@@ -16,12 +16,17 @@ include "koneksi.php";
         font-family: "Montserrat";
       }
       
+      
     
     </style>
   </head>
   <body>
     <div class="container">
-     <h2 class="my-3">Data Siswa Zhao University</h2>
+     <div class="container">
+            <div class="cloud">
+                 <span> <h2 style="font-family:Montserrat ;">Data Siswa</h2></span>
+            </div>
+        </div>
 
 
 
