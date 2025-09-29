@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <h2>Isi Bio Data Siswa</h2>
   <form action="" method="post" onsubmit="return validasi()">
     <label>NIS:</label>
-    <input type="number" name="nis" id="nis" onchange="sayhallo()"><br><br>
+    <input type="number" name="nis" id="nis"><br><br>
 
     <label>Nama:</label>
     <input type="text" name="nama" id="nama"><br><br>
