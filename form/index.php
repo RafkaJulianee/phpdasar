@@ -20,7 +20,8 @@ include "koneksi.php";
   </head>
   <body>
     <div class="container">
-     <h2 class="my-3">Data Siswa XI-RPL 1</h2>
+     <h2 class="my-3">Data Siswa Zhao University</h2>
+     
 
 
      <!-- Tombol Tambah Data -->
