@@ -26,12 +26,35 @@ if (isset($_POST['update'])) {
     $alamat = $_POST['alamat'];
     $no_hp  = $_POST['nohp'];
 
+    // --- BARU: LOGIKA UNTUK UPDATE FOTO ---
+    $foto_lama = $_POST['foto_lama'];
+    $nama_file_baru = $foto_lama; // Default, gunakan nama file lama
+
+    // Cek apakah user mengupload file foto baru
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0 && !empty($_FILES['foto']['name'])) {
+        // Hapus foto lama jika ada
+        if (!empty($foto_lama) && file_exists("uploads/" . $foto_lama)) {
+            unlink("uploads/" . $foto_lama);
+        }
+
+        // Proses upload foto baru
+        $foto_nama = $_FILES['foto']['name'];
+        $foto_tmp  = $_FILES['foto']['tmp_name'];
+        $nama_file_baru = uniqid() . '-' . basename($foto_nama);
+        $target_dir = "uploads/";
+        $target_file = $target_dir . $nama_file_baru;
+        move_uploaded_file($foto_tmp, $target_file);
+    }
+    // --- AKHIR LOGIKA FOTO ---
+
+    // --- MODIFIKASI: Tambahkan 'foto' ke query UPDATE ---
     $update = mysqli_query($conn, "UPDATE siswa SET 
         nama='$nama',
         kelas='$kelas',
         jenis_kelamin='$jenis',
         alamat='$alamat',
-        no_hp='$no_hp'
+        no_hp='$no_hp',
+        foto='$nama_file_baru'
         WHERE nis='$nis'
     ");
 
@@ -91,7 +114,9 @@ if (isset($_POST['update'])) {
 
 <body>
   <h2>Edit Data Siswa</h2>
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="foto_lama" value="<?=$data['foto'];?>">
+
     <label>NIS:</label>
     <input type="number" name="nis" value="<?=$data['nis'];?>" readonly><br><br>
 
@@ -103,20 +128,7 @@ if (isset($_POST['update'])) {
       <option value="">Pilih Kelas</option>
       <option value="XI-RPL1" <?=$data['kelas']=="XI-RPL1"?"selected":"";?>>XI-RPL1</option>
       <option value="XI-RPL2" <?=$data['kelas']=="XI-RPL2"?"selected":"";?>>XI-RPL2</option>
-      <option value="XI-GIM" <?=$data['kelas']=="XI-GIM"?"selected":"";?>>XI-GIM</option>
-      <option value="XI-TKJT 1" <?=$data['kelas']=="XI-TKJT 1"?"selected":"";?>>XI-TKJT 1</option>
-      <option value="XI-TKJT 2" <?=$data['kelas']=="XI-TKJT 2"?"selected":"";?>>XI-TKJT 2</option>
-      <option value="XI-TKJT 3" <?=$data['kelas']=="XI-TKJT 3"?"selected":"";?>>XI-TKJT 3</option>
-      <option value="XI-TO 1" <?=$data['kelas']=="XI-TO 1"?"selected":"";?>>XI-TO 1</option>
-      <option value="XI-TO 2" <?=$data['kelas']=="XI-TO 2"?"selected":"";?>>XI-TO 2</option>
-      <option value="XI-TO 3" <?=$data['kelas']=="XI-TO 3"?"selected":"";?>>XI-TO 3</option>
-      <option value="XI-AKL 1" <?=$data['kelas']=="XI-AKL 1"?"selected":"";?>>XI-AKL 1</option>
-      <option value="XI-AKL 2" <?=$data['kelas']=="XI-AKL 2"?"selected":"";?>>XI-AKL 2</option>
-      <option value="XI-MP 1" <?=$data['kelas']=="XI-MP 1"?"selected":"";?>>XI-MP 1</option>
-      <option value="XI-MP 2" <?=$data['kelas']=="XI-MP 2"?"selected":"";?>>XI-MP 2</option>
-      <option value="XI-SP 1" <?=$data['kelas']=="XI-SP 1"?"selected":"";?>>XI-SP 1</option>
-      <option value="XI-SP 2" <?=$data['kelas']=="XI-SP 2"?"selected":"";?>>XI-SP 2</option>
-    </select><br><br>
+      </select><br><br>
 
     <label>Jenis Kelamin:</label>
     <input type="radio" name="jk" value="Laki-Laki" <?=$data['jenis_kelamin']=="Laki-Laki"?"checked":"";?>>Laki-Laki
@@ -129,8 +141,32 @@ if (isset($_POST['update'])) {
     <label>No Hp:</label>
     <input type="number" name="nohp" value="<?=$data['no_hp'];?>" required><br><br>
 
+    <label>Foto Saat Ini:</label>
+    <?php
+        $path_foto = "uploads/" . $data['foto'];
+        if (!empty($data['foto']) && file_exists($path_foto)) {
+            echo '<img id="previewFoto" src="' . $path_foto . '" width="100" style="margin-bottom:10px;">';
+        } else {
+            echo '<img id="previewFoto" src="https://via.placeholder.com/100" width="100" style="margin-bottom:10px;">';
+        }
+    ?>
+    <br>
+    <label>Ganti Foto:</label>
+    <input type="file" name="foto" accept="image/*" onchange="tampilkanPreview(this, 'previewFoto')"><br><br>
     <input type="submit" name="update" value="Update">
     <a href="index.php">Kembali</a>
   </form>
+
+  <script>
+    function tampilkanPreview(input, idPreview) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById(idPreview).src = e.target.result;
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+  </script>
 </body>
 </html>
