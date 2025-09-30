@@ -9,34 +9,29 @@ include "koneksi.php";
     <title>Data Siswa</title>
     <link rel="stylesheet" href="CSS/style.css">
     <link rel="shortcut icon" href="img/profil1.png" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
       body{
         font-family: "Montserrat";
       }
-      
-      
-    
     </style>
   </head>
   <body>
     <div class="container">
      <div class="container">
             <div class="cloud">
-                 <span> <h2 style="font-family:Montserrat ;">Data Siswa</h2></span>
+                  <span> <h2 style="font-family:Montserrat ;">Data Siswa</h2></span>
             </div>
         </div>
 
-
-
-     <!-- Tombol Tambah Data -->
      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
 
-     <table class="table">
-        <thead class="table-blue">
+     <table class="table table-striped table-bordered">
+        <thead class="table-dark">
             <tr>
                 <th>No</th>
+                <th>Foto</th>
                 <th>NIS</th>
                 <th>Nama</th>
                 <th>Kelas</th>
@@ -52,8 +47,20 @@ include "koneksi.php";
             $query = mysqli_query($conn, "SELECT * FROM siswa");
             while($row=mysqli_fetch_assoc($query)){
             ?>
-                 <tr>
+                <tr>
                     <td><?=$no++;?></td>
+                    <td>
+                        <?php
+                        // Cek apakah ada nama file foto di database dan file-nya ada di folder uploads
+                        if (!empty($row['foto']) && file_exists("uploads/" . $row['foto'])) {
+                            // Jika ada, tampilkan foto siswa
+                            echo '<img src="uploads/' . $row['foto'] . '" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="Foto ' . $row['nama'] . '">';
+                        } else {
+                            // Jika tidak ada, tampilkan placeholder
+                            echo '<img src="https://via.placeholder.com/50" class="rounded-circle" alt="Foto tidak tersedia">';
+                        }
+                        ?>
+                    </td>
                     <td><?=$row['nis'];?></td>
                     <td><?=$row['nama'];?></td>
                     <td><?=$row['kelas'];?></td>
@@ -61,14 +68,14 @@ include "koneksi.php";
                     <td><?=$row['alamat'];?></td>
                     <td><?=$row['no_hp'];?></td>
                     <td>
-                        <a class="btn" style="color:green;" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
-                        <a class="btn" style="color:red;" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+                        <a class="btn btn-success btn-sm" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
+                        <a class="btn btn-danger btn-sm" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
                     </td>
-                 </tr>
+                </tr>
             <?php } ?>
         </tbody>
      </table>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
