@@ -26,12 +26,36 @@ if (isset($_POST['update'])) {
     $alamat = $_POST['alamat'];
     $no_hp  = $_POST['nohp'];
 
+    // Handle upload foto
+    $fotoLama = $data['foto'];
+    $fotoBaru = $_FILES['foto']['name'];
+
+    if ($fotoBaru != "") {
+        $targetDir = "uploads/";
+        $targetFile = $targetDir . basename($fotoBaru);
+
+        // Upload file baru
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $targetFile)) {
+            $foto = $fotoBaru;
+
+            // Hapus foto lama kalau ada
+            if ($fotoLama != "" && file_exists("uploads/" . $fotoLama)) {
+                unlink("uploads/" . $fotoLama);
+            }
+        } else {
+            $foto = $fotoLama; // kalau gagal upload, tetap pakai lama
+        }
+    } else {
+        $foto = $fotoLama;
+    }
+
     $update = mysqli_query($conn, "UPDATE siswa SET 
         nama='$nama',
         kelas='$kelas',
         jenis_kelamin='$jenis',
         alamat='$alamat',
-        no_hp='$no_hp'
+        no_hp='$no_hp',
+        foto='$foto'
         WHERE nis='$nis'
     ");
 
@@ -44,54 +68,28 @@ if (isset($_POST['update'])) {
 ?>
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
   <meta charset="UTF-8">
   <title>Edit Data Siswa</title>
-  <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: "Montserrat", sans-serif;
-      margin: 20px;
-    }
-    label {
-      display: inline-block;
-      width: 120px;
-      margin-bottom: 10px;
-    }
-    input[type="text"],
-    input[type="number"],
-    select,
-    textarea {
-      padding: 5px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      width: 250px;
+    body { font-family: "Montserrat", sans-serif; margin: 20px; }
+    label { display: inline-block; width: 120px; margin-bottom: 10px; }
+    input[type="text"], input[type="number"], select, textarea {
+      padding: 5px; margin-bottom: 10px; border: 1px solid #ccc;
+      border-radius: 4px; width: 250px;
     }
     input[type="submit"] {
-      background-color: blue;
-      border: none;
-      color: white;
-      padding: 10px 20px;
-      font-size: 16px;
-      margin: 4px 2px;
-      cursor: pointer;
-      border-radius: 5px;
+      background-color: blue; border: none; color: white; padding: 10px 20px;
+      font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 5px;
     }
-    a {
-      text-decoration: none;
-      color: blue;
-      font-weight: bold;
-      margin-left: 10px;
-    }
+    a { text-decoration: none; color: blue; font-weight: bold; margin-left: 10px; }
+    img { border-radius: 8px; margin: 10px 0; }
   </style>
 </head>
-
 <body>
   <h2>Edit Data Siswa</h2>
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
     <label>NIS:</label>
     <input type="number" name="nis" value="<?=$data['nis'];?>" readonly><br><br>
 
@@ -128,6 +126,16 @@ if (isset($_POST['update'])) {
 
     <label>No Hp:</label>
     <input type="number" name="nohp" value="<?=$data['no_hp'];?>" required><br><br>
+
+    <label>Foto Lama:</label><br>
+    <?php if ($data['foto'] != "") { ?>
+      <img src="uploads/<?=$data['foto'];?>" width="120"><br>
+    <?php } else { ?>
+      <p>(Belum ada foto)</p>
+    <?php } ?>
+
+    <label>Ganti Foto:</label>
+    <input type="file" name="foto"><br><br>
 
     <input type="submit" name="update" value="Update">
     <a href="index.php">Kembali</a>

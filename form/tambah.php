@@ -10,13 +10,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $alamat = $_POST['alamat'];
     $nohp   = $_POST['nohp'];
 
+    // --- proses upload foto ---
+    $foto = "";
+    if (isset($_FILES['foto']) && $_FILES['foto']['error'] == 0) {
+        $target_dir = "uploads/";
+        if (!is_dir($target_dir)) {
+            mkdir($target_dir, 0777, true); // bikin folder kalau belum ada
+        }
+
+        $foto_name = time() . "_" . basename($_FILES["foto"]["name"]);
+        $target_file = $target_dir . $foto_name;
+
+        if (move_uploaded_file($_FILES["foto"]["tmp_name"], $target_file)) {
+            $foto = $target_file;
+        } else {
+            echo "<script>alert('Upload foto gagal!');</script>";
+        }
+    }
+
     // Cek apakah NIS sudah ada
     $cek = mysqli_query($conn, "SELECT * FROM siswa WHERE nis='$nis'");
     if (mysqli_num_rows($cek) > 0) {
         echo "<script>alert('NIS sudah ada, silakan gunakan yang lain!'); window.location='tambah.php';</script>";
     } else {
-        $query = "INSERT INTO siswa (nis, nama, kelas, jenis_kelamin, alamat, no_hp) 
-                  VALUES ('$nis', '$nama', '$kelas', '$jk', '$alamat', '$nohp')";
+        $query = "INSERT INTO siswa (nis, nama, kelas, jenis_kelamin, alamat, no_hp, foto) 
+                  VALUES ('$nis', '$nama', '$kelas', '$jk', '$alamat', '$nohp', '$foto')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
@@ -76,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
   <h2>Isi Bio Data Siswa</h2>
-  <form action="" method="post" onsubmit="return validasi()">
+  <form action="" method="post" enctype="multipart/form-data" onsubmit="return validasi()">
     <label>NIS:</label>
     <input type="number" name="nis" id="nis"><br><br>
 
@@ -113,16 +131,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label>No Hp:</label>
     <input type="number" name="nohp" id="nohp"><br><br>
 
+    <label>Foto:</label>
+    <input type="file" name="foto" accept="image/*"><br><br>
+
     <input type="submit" value="Simpan">
     <a href="index.php">Kembali</a>
   </form>
 
   <script>
-    function sayhallo() {
-      var nm = document.getElementById('nis').value;
-      alert("Hallo, " + nm);
-    }
-
     function validasi() {
       var nis = document.getElementById("nis").value;
       if (nis == "") {
