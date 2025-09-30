@@ -15,12 +15,9 @@ include "koneksi.php";
       body{
         font-family: "Montserrat";
       }
-        img {
-    width: 80px;       /* biar ukurannya konsisten */
-    height: 80px;      /* samain dengan width */
-    object-fit: cover; /* biar gambar nggak gepeng */
-    border-radius: 50%; 
-  }
+      
+      
+    
     </style>
   </head>
   <body>
@@ -31,11 +28,13 @@ include "koneksi.php";
             </div>
         </div>
 
+
+
      <!-- Tombol Tambah Data -->
      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
 
-     <table class="table table-bordered align-middle">
-        <thead class="table-primary">
+     <table class="table">
+        <thead class="table-blue">
             <tr>
                 <th>No</th>
                 <th>NIS</th>
@@ -44,7 +43,6 @@ include "koneksi.php";
                 <th>Jenis Kelamin</th>
                 <th>Alamat</th>
                 <th>No Hp</th>
-                <th>Foto</th>
                 <th>Aksi</th>
             </tr>
         </thead>
@@ -63,15 +61,8 @@ include "koneksi.php";
                     <td><?=$row['alamat'];?></td>
                     <td><?=$row['no_hp'];?></td>
                     <td>
-                      <?php if ($row['foto']) { ?>
-                        <img src="<?=$row['foto'];?>" alt="Foto">
-                      <?php } else { ?>
-                        <span class="text-muted">Tidak ada</span>
-                      <?php } ?>
-                    </td>
-                    <td>
-                        <a class="btn btn-sm btn-success" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
-                        <a class="btn btn-sm btn-danger" href="hapus.php?nis=<?=$row['nis'];?>" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+                        <a class="btn" style="color:green;" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
+                        <a class="btn" style="color:red;" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
                     </td>
                  </tr>
             <?php } ?>
