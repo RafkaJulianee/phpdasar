@@ -27,8 +27,8 @@ include "koneksi.php";
 
      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
 
-     <table class="table table-striped table-bordered">
-        <thead class="table-dark">
+     <table class="table">
+        <thead class="table-blue">
             <tr>
                 <th>No</th>
                 <th>Foto</th>
@@ -51,12 +51,12 @@ include "koneksi.php";
                     <td><?=$no++;?></td>
                     <td>
                         <?php
-                        // Cek apakah ada nama file foto di database dan file-nya ada di folder uploads
+                        // Cek apakah ada foto di database dan filenya ada di server
                         if (!empty($row['foto']) && file_exists("uploads/" . $row['foto'])) {
-                            // Jika ada, tampilkan foto siswa
+                            // Tampilkan foto bulat menggunakan class bootstrap
                             echo '<img src="uploads/' . $row['foto'] . '" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="Foto ' . $row['nama'] . '">';
                         } else {
-                            // Jika tidak ada, tampilkan placeholder
+                            // Tampilkan placeholder jika tidak ada foto
                             echo '<img src="https://via.placeholder.com/50" class="rounded-circle" alt="Foto tidak tersedia">';
                         }
                         ?>
@@ -68,8 +68,8 @@ include "koneksi.php";
                     <td><?=$row['alamat'];?></td>
                     <td><?=$row['no_hp'];?></td>
                     <td>
-                        <a class="btn btn-success btn-sm" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
-                        <a class="btn btn-danger btn-sm" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+                        <a class="btn" style="color:green;" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
+                        <a class="btn" style="color:red;" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
                     </td>
                 </tr>
             <?php } ?>
