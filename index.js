@@ -18,3 +18,4 @@ document.writeln(player.position);
 document.writeln("<br>");
 document.writeln(player.nationality);
 document.writeln("<br>");
+document.writeln("<img src='"+player.img+"' width='200'>");
