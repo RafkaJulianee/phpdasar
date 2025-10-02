@@ -5,6 +5,7 @@ player ={
     age : 22,
     club : "RB LEIPZIG",
     position : "MIDFIELDER",
+    nationality : "HUNGARY"
 
 
 }
