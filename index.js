@@ -1,5 +1,10 @@
 
 
 player ={
-    name : "Ronaldo",
+    name : "DOMINIK SZOBOZLAI",
+    age : 22,
+    club : "RB LEIPZIG",
+    position : "MIDFIELDER",
+
+
 }
