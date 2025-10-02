@@ -6,7 +6,7 @@ player ={
     club : "RB LEIPZIG",
     position : "MIDFIELDER",
     nationality : "HUNGARY",
-    img: "https://upload.wikimedia.org/wikipedia/commons/1/11/Dominik_Szoboszlai_2020.jpg"
+    img: "image.png"
 }
 document.writeln(player.name);
 document.writeln("<br>");
@@ -18,4 +18,4 @@ document.writeln(player.position);
 document.writeln("<br>");
 document.writeln(player.nationality);
 document.writeln("<br>");
-document.writeln("<img src='"+player.img+"' width='200'>");
+document.writeln("<img src='"+player.img+"' width='200' style='border-radius:10px;'>");
