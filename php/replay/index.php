@@ -7,7 +7,9 @@
 </head>
 <body>
     <?php
-echo "Hello World";
+    $player=['Mbbape','Yamal','haaland'];
+    
+
 ?>
 </body>
 </html>
