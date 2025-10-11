@@ -1,6 +1,8 @@
 
+speed = 95
 
-Speed = 95
-if (Speed ==95){
+
+if (speed ==95){
     document.writeln("S Rank")
 }
+
