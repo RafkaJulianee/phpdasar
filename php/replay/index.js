@@ -1,12 +1,12 @@
+let speed = 95;
+let mbappe = "Kylian Mbappe";
 
-speed = 95
-
-
-if (speed ==95){
-    document.writeln("S Rank")
+function getPlayerRank(speed) {
+    if (speed === 95) {
+        return "S Rank";
+    }
+    // Add more conditions for other ranks if needed
+    return "Unknown Rank";
 }
 
-mbappe ="Kylian Mbape"
-function speed(mbappe){
-
-}
+document.writeln(getPlayerRank(speed));
