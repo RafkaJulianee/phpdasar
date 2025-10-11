@@ -8,6 +8,7 @@
 <body>
     <?php
     $player=['Mbbape','Yamal','haaland'];
+    echo $player[0];
     
 
 
