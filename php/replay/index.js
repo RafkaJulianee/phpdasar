@@ -6,6 +6,7 @@ if (speed ==95){
     document.writeln("S Rank")
 }
 
-class player{
-    
+mbappe ="Kylian Mbape"
+function speed(mbappe){
+
 }
