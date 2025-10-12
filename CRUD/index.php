@@ -3,6 +3,16 @@ include "koneksi.php";
 ?>
 <!doctype html>
 <html lang="en">
+  <!--
+      ██╗██╗   ██╗██╗     ██╗ █████╗ ███╗   ██╗███████╗
+      ██║██║   ██║██║     ██║██╔══██╗████╗  ██║██╔════╝
+      ██║██║   ██║██║     ██║███████║██╔██╗ ██║█████╗  
+ ██   ██║██║   ██║██║     ██║██╔══██║██║╚██╗██║██╔══╝  
+ ╚█████╔╝╚██████╔╝███████╗██║██║  ██║██║ ╚████║███████╗
+  ╚════╝  ╚═════╝ ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝
+                R A F K A   J U L I A N
+-->
+
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +26,7 @@ include "koneksi.php";
         font-family: "Montserrat";
       }
     </style>
+
   </head>
   <body>
     <div class="container">
