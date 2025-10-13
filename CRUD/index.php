@@ -231,9 +231,6 @@ include "koneksi.php";
           <a href="tambah.php" class="btn btn-circle" title="Tambah Siswa Baru">
             <i class="bi bi-plus-lg"></i>
           </a>
-          <a href="export.php" class="btn btn-circle" title="Export Data ke CSV">
-             <i class="bi bi-upload"></i>
-          </a>
         </div>
       </div>
 
