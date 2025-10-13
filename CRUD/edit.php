@@ -80,7 +80,7 @@ if (isset($_POST['update'])) {
 
 <head>
   <meta charset="UTF-8">
-  <title>Edit Data Siswa</title>
+  <title>Edit</title>
   <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
