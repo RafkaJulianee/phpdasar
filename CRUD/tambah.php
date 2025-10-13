@@ -9,32 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $jk     = $_POST['jk'];
     $alamat = $_POST['alamat'];
     $nohp   = $_POST['nohp'];
-    
-    // --- BARU: LOGIKA UNTUK UPLOAD FOTO ---
-    $foto_nama = $_FILES['foto']['name'];
-    $foto_tmp  = $_FILES['foto']['tmp_name'];
-    $nama_file_baru = ""; // Variabel untuk menyimpan nama file di database
-
-    // Cek jika ada file yang diupload
-    if (!empty($foto_nama)) {
-        // Buat nama file yang unik untuk menghindari duplikasi
-        $nama_file_baru = uniqid() . '-' . basename($foto_nama);
-        $target_dir = "uploads/";
-        $target_file = $target_dir . $nama_file_baru;
-
-        // Pindahkan file dari temporary location ke folder uploads
-        move_uploaded_file($foto_tmp, $target_file);
-    }
-    // --- AKHIR BAGIAN BARU ---
 
     // Cek apakah NIS sudah ada
     $cek = mysqli_query($conn, "SELECT * FROM siswa WHERE nis='$nis'");
     if (mysqli_num_rows($cek) > 0) {
         echo "<script>alert('NIS sudah ada, silakan gunakan yang lain!'); window.location='tambah.php';</script>";
     } else {
-        // --- MODIFIKASI: Tambahkan kolom dan variabel 'foto' ke query INSERT ---
-        $query = "INSERT INTO siswa (nis, nama, kelas, jenis_kelamin, alamat, no_hp, foto) 
-                  VALUES ('$nis', '$nama', '$kelas', '$jk', '$alamat', '$nohp', '$nama_file_baru')";
+        // Simpan data tanpa kolom foto
+        $query = "INSERT INTO siswa (nis, nama, kelas, jenis_kelamin, alamat, no_hp) 
+                  VALUES ('$nis', '$nama', '$kelas', '$jk', '$alamat', '$nohp')";
         
         $result = mysqli_query($conn, $query);
 
@@ -56,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    /* CSS TIDAK DIUBAH SAMA SEKALI, SESUAI PERMINTAAN */
     body {
          font-family: "Montserrat", sans-serif;
          margin: 20px;
@@ -96,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body>
   <h2>Isi Bio Data Siswa</h2>
-  <form action="" method="post" onsubmit="return validasi()" enctype="multipart/form-data">
+  <form action="" method="post" onsubmit="return validasi()">
     <label>NIS:</label>
     <input type="number" name="nis" id="nis"><br><br>
 
@@ -108,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <option value="">Pilih Kelas</option>
       <option value="XI-RPL1">XI-RPL1</option>
       <option value="XI-RPL2">XI-RPL2</option>
-      </select><br><br>
+    </select><br><br>
 
     <label>Jenis Kelamin:</label>
     <input type="radio" name="jk" value="Laki-Laki">Laki-Laki
@@ -120,32 +102,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <label>No Hp:</label>
     <input type="number" name="nohp" id="nohp"><br><br>
 
-    <label>Foto:</label>
-    <input type="file" name="foto" id="foto" accept="image/*" onchange="tampilkanPreview(this, 'previewFoto')"><br><br>
-    
-    <label></label> <img id="previewFoto" width="150" style="margin-bottom: 10px;">
-    <br><br>
     <input type="submit" value="Simpan">
     <a href="index.php">Kembali</a>
   </form>
 
   <script>
-    function sayhallo() {
-      var nm = document.getElementById('nis').value;
-      alert("Hallo, " + nm);
-    }
-
-    // --- BARU: Fungsi untuk menampilkan preview gambar ---
-    function tampilkanPreview(input, idPreview) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById(idPreview).src = e.target.result;
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
     function validasi() {
       var nis = document.getElementById("nis").value;
       if (nis == "") {

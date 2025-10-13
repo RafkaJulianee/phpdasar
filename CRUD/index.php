@@ -26,67 +26,55 @@ include "koneksi.php";
         font-family: "Montserrat";
       }
     </style>
-
   </head>
+
   <body>
     <div class="container">
-     <div class="container">
-            <div class="cloud">
-                  <span> <h2 style="font-family:Montserrat ;">Data Siswa</h2></span>
-            </div>
+      <div class="container">
+        <div class="cloud">
+          <span><h2 style="font-family:Montserrat;">Data Siswa</h2></span>
         </div>
+      </div>
 
-     <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
+      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
 
-     <table class="table">
+      <table class="table">
         <thead class="table-blue">
-            <tr>
-                <th>No</th>
-                <th>Foto</th>
-                <th>NIS</th>
-                <th>Nama</th>
-                <th>Kelas</th>
-                <th>Jenis Kelamin</th>
-                <th>Alamat</th>
-                <th>No Hp</th>
-                <th>Aksi</th>
-            </tr>
+          <tr>
+            <th>No</th>
+            <th>NIS</th>
+            <th>Nama</th>
+            <th>Kelas</th>
+            <th>Jenis Kelamin</th>
+            <th>Alamat</th>
+            <th>No Hp</th>
+            <th>Aksi</th>
+          </tr>
         </thead>
         <tbody>
-            <?php
-            $no=1;
-            $query = mysqli_query($conn, "SELECT * FROM siswa");
-            while($row=mysqli_fetch_assoc($query)){
-            ?>
-                <tr>
-                    <td><?=$no++;?></td>
-                    <td>
-                        <?php
-                        // Cek apakah ada foto di database dan filenya ada di server
-                        if (!empty($row['foto']) && file_exists("uploads/" . $row['foto'])) {
-                            // Tampilkan foto bulat menggunakan class bootstrap
-                            echo '<img src="uploads/' . $row['foto'] . '" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" alt="Foto ' . $row['nama'] . '">';
-                        } else {
-                            // Tampilkan placeholder jika tidak ada foto
-                            echo '<img src="https://via.placeholder.com/50" class="rounded-circle" alt="Foto tidak tersedia">';
-                        }
-                        ?>
-                    </td>
-                    <td><?=$row['nis'];?></td>
-                    <td><?=$row['nama'];?></td>
-                    <td><?=$row['kelas'];?></td>
-                    <td><?=$row['jenis_kelamin'];?></td>
-                    <td><?=$row['alamat'];?></td>
-                    <td><?=$row['no_hp'];?></td>
-                    <td>
-                        <a class="btn" style="color:green;" href="edit.php?nis=<?=$row['nis'];?>">Edit</a>
-                        <a class="btn" style="color:red;" href="hapus.php?nis=<?=$row['nis'];?>"  onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
-                    </td>
-                </tr>
-            <?php } ?>
+          <?php
+          $no = 1;
+          $query = mysqli_query($conn, "SELECT * FROM siswa");
+          while ($row = mysqli_fetch_assoc($query)) {
+          ?>
+            <tr>
+              <td><?= $no++; ?></td>
+              <td><?= $row['nis']; ?></td>
+              <td><?= $row['nama']; ?></td>
+              <td><?= $row['kelas']; ?></td>
+              <td><?= $row['jenis_kelamin']; ?></td>
+              <td><?= $row['alamat']; ?></td>
+              <td><?= $row['no_hp']; ?></td>
+              <td>
+                <a class="btn" style="color:green;" href="edit.php?nis=<?= $row['nis']; ?>">Edit</a>
+                <a class="btn" style="color:red;" href="hapus.php?nis=<?= $row['nis']; ?>" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+              </td>
+            </tr>
+          <?php } ?>
         </tbody>
-     </table>
+      </table>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
