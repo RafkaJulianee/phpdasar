@@ -79,6 +79,7 @@ include "koneksi.php";
     .search-container {
       position: relative;
       min-width: 300px;
+      flex-grow: 1;
     }
 
     .search-container .bi-search {
@@ -95,6 +96,7 @@ include "koneksi.php";
       padding: 0.75rem 1rem 0.75rem 2.5rem; /* Left padding for icon */
       background-color: var(--bg-color);
       transition: all 0.3s ease;
+      width: 100%;
     }
     .search-input:focus {
       background-color: white;
@@ -223,13 +225,13 @@ include "koneksi.php";
       <div class="page-controls">
         <div class="search-container">
           <i class="bi bi-search"></i>
-          <input type="text" class="form-control search-input" placeholder="Cari siswa berdasarkan nama, NIS, dll...">
+          <input type="text" id="searchInput" class="form-control search-input" placeholder="Cari siswa berdasarkan nama, NIS, dll...">
         </div>
         <div class="header-actions">
           <a href="tambah.php" class="btn btn-circle" title="Tambah Siswa Baru">
             <i class="bi bi-plus-lg"></i>
           </a>
-          <a href="#" class="btn btn-circle" title="Export Data">
+          <a href="export.php" class="btn btn-circle" title="Export Data ke CSV">
              <i class="bi bi-upload"></i>
           </a>
         </div>
@@ -247,7 +249,7 @@ include "koneksi.php";
               <th class="text-end">Aksi</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="studentTableBody">
             <?php
             $query = mysqli_query($conn, "SELECT * FROM siswa");
             if(mysqli_num_rows($query) > 0) {
@@ -272,13 +274,13 @@ include "koneksi.php";
                   <a class="btn-edit" href="edit.php?nis=<?= $row['nis']; ?>" title="Edit">
                     <i class="bi bi-pencil-square"></i>
                   </a>
-                  <a class="btn-delete" href="hapus.php?nis=<?= $row['nis']; ?>" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                  <a class="btn-delete" href="hapus.php?nis=<?= $row['nis']; ?>" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus data siswa ini?')">
                     <i class="bi bi-trash3"></i>
                   </a>
                 </td>
               </tr>
             <?php } } else { ?>
-              <tr>
+              <tr id="no-data">
                 <td colspan="6" class="text-center py-5">
                     <p class="text-muted">Belum ada data siswa.</p>
                 </td>
@@ -292,6 +294,44 @@ include "koneksi.php";
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    // Fitur Pencarian Real-time
+    document.getElementById('searchInput').addEventListener('keyup', function() {
+        let filter = this.value.toUpperCase();
+        let tableBody = document.getElementById('studentTableBody');
+        let rows = tableBody.getElementsByTagName('tr');
+        let noDataRow = document.getElementById('no-data');
+        let found = false;
+
+        for (let i = 0; i < rows.length; i++) {
+            // Pastikan kita tidak memfilter baris "no data"
+            if(rows[i].id === 'no-data') continue;
+
+            let nameCell = rows[i].getElementsByTagName('td')[0];
+            if (nameCell) {
+                let textValue = nameCell.textContent || nameCell.innerText;
+                if (textValue.toUpperCase().indexOf(filter) > -1) {
+                    rows[i].style.display = "";
+                    found = true;
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+        
+        // Tampilkan atau sembunyikan baris "no data" jika tidak ada hasil pencarian
+        if (noDataRow) {
+            if (found) {
+                noDataRow.style.display = "none";
+            } else {
+                 // Ubah pesan jika tidak ada hasil pencarian
+                noDataRow.querySelector('p').textContent = 'Data siswa tidak ditemukan.';
+                noDataRow.style.display = "";
+            }
+        }
+    });
+  </script>
 </body>
 </html>
 
