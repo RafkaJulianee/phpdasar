@@ -126,7 +126,6 @@ if (isset($_POST['update'])) {
 <body>
   <h2>Edit Data Siswa</h2>
   <form method="POST" enctype="multipart/form-data">
-    <input type="hidden" name="foto_lama" value="<?=$data['foto'];?>">
 
     <label>NIS:</label>
     <input type="number" name="nis" value="<?=$data['nis'];?>" readonly><br><br>
