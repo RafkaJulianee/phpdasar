@@ -219,7 +219,7 @@ include "koneksi.php";
     <div class="main-container">
       
       <div class="page-header">
-        <h1 class="page-title">Siswa</h1>
+        <h1 class="page-title">Data</h1>
       </div>
 
       <div class="page-controls">
