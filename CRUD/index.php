@@ -18,7 +18,7 @@ include "koneksi.php";
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Data Siswa</title>
     <link rel="stylesheet" href="CSS/style.css">
-    <link rel="shortcut icon" href="img/profil1.png" type="image/x-icon">
+     <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Cossette+Titre:wght@400;700&family=Dancing+Script:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>

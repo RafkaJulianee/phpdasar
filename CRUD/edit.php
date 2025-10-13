@@ -82,6 +82,7 @@ if (isset($_POST['update'])) {
   <meta charset="UTF-8">
   <title>Edit</title>
   <link rel="shortcut icon" href="kucing.png" type="image/x-icon">
+  <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
