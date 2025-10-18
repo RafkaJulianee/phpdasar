@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Cuaca</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0; /* Menghapus margin default untuk fullscreen */
+        }
+        .weather-app-container {
+            width: 100vw; /* Lebar penuh sesuai viewport */
+            height: 100vh; /* Tinggi penuh sesuai viewport */
+            background: linear-gradient(160deg, #84d0ff, #5c97f2); /* Gradien warna baru yang lebih mirip */
+            overflow: hidden;
+            position: relative;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .hourly-item-active {
+            background-color: #4D8FFF; /* Warna biru aktif baru yang lebih mirip gambar */
+            color: white;
+        }
+        .view {
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 1.5rem;
+            overflow-y: auto;
+        }
+        .view.hidden {
+            transform: translateX(100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .view:not(.hidden) {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        /* Custom scrollbar */
+        .view::-webkit-scrollbar {
+            width: 4px;
+        }
+        .view::-webkit-scrollbar-thumb {
+            background-color: rgba(255,255,255,0.3);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="weather-app-container">
+        <!-- Tampilan Hari Ini -->
+        <div id="today-view" class="view">
+            <header class="flex justify-between items-center mb-6">
+                <button class="p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+                <button class="p-2 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                </button>
+                <img src="https://placehold.co/40x40/FFFFFF/3B82F6?text=U" alt="User" class="rounded-full">
+            </header>
+
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h1 id="location" class="text-white font-bold text-2xl leading-tight">Memuat...</h1>
+                    <p id="date" class="text-white/80 text-sm">--</p>
+                </div>
+                <img src="https://storage.googleapis.com/gemini-prod-us-west1-assets/e53a3a4a7cfc359f143a53f7c413cd41" alt="Map" class="w-24 h-24 object-contain -mt-4">
+            </div>
+
+            <div class="text-center my-6">
+                <div class="relative inline-block">
+                    <div id="main-icon" class="w-48 h-48 mx-auto -mb-8">
+                        <!-- Ikon cuaca utama akan dimasukkan di sini oleh JS -->
+                    </div>
+                    <p id="main-temp" class="text-white font-extrabold text-8xl">--°</p>
+                    <p class="text-white/80 text-lg -mt-2">Terasa seperti <span id="feels-like">--</span>°</p>
+                </div>
+                <p id="main-desc" class="text-white font-bold text-3xl mt-2 capitalize">--</p>
+            </div>
+            
+            <div class="glass-card p-4 flex justify-around text-white text-center text-xs mb-6">
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-1 opacity-80"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    <span id="precipitation">--%</span>
+                    <span>Presipitasi</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-1 opacity-80"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+                    <span id="wind-speed">-- km/h</span>
+                    <span>Angin</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-1 opacity-80"><path d="M14.5 2H9.5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    <span id="humidity">--%</span>
+                    <span>Kelembapan</span>
+                </div>
+            </div>
+
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-white font-bold text-xl">Hari Ini</h2>
+                <button id="next-5-days-btn" class="text-white/80 text-sm hover:text-white transition">5 Hari Berikutnya &gt;</button>
+            </div>
+
+            <div id="hourly-forecast" class="flex space-x-3 overflow-x-auto pb-4">
+                 <!-- Prakiraan per jam akan dimasukkan di sini oleh JS -->
+            </div>
+        </div>
+        
+        <!-- Tampilan 5 Hari Berikutnya -->
+        <div id="forecast-view" class="view hidden">
+             <header class="flex justify-between items-center mb-6">
+                <button id="back-btn" class="p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+                <h2 class="text-white font-bold text-xl">5 Hari Berikutnya</h2>
+                <img src="https://placehold.co/40x40/FFFFFF/3B82F6?text=U" alt="User" class="rounded-full">
+            </header>
+
+            <div id="daily-tabs" class="flex justify-center space-x-2 mb-6">
+                <!-- Tab harian akan dimasukkan di sini -->
+            </div>
+            
+            <div class="text-center my-6">
+                 <div class="relative inline-block">
+                    <div id="forecast-main-icon" class="w-48 h-48 mx-auto -mb-8"></div>
+                    <p id="forecast-main-temp" class="text-white font-extrabold text-8xl">--°</p>
+                    <p class="text-white/80 text-lg -mt-2">Terasa seperti <span id="forecast-feels-like">--</span>°</p>
+                </div>
+                <p id="forecast-main-desc" class="text-white font-bold text-3xl mt-2 capitalize">--</p>
+            </div>
+             
+            <div class="glass-card p-4 flex justify-around text-white text-center text-xs mb-6">
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-1 opacity-80"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
+                    <span id="forecast-precipitation">--%</span>
+                    <span>Presipitasi</span>
+                </div>
+                <div class="flex flex-col items-center">
+                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-1 opacity-80"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+                    <span id="forecast-wind-speed">-- km/h</span>
+                    <span>Angin</span>
+                </div>
+                <div class="flex flex-col items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8 mb-1 opacity-80"><path d="M14.5 2H9.5a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h5a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                    <span id="forecast-humidity">--%</span>
+                    <span>Kelembapan</span>
+                </div>
+            </div>
+
+            <div id="daily-forecast-list" class="space-y-3">
+                <!-- Daftar prakiraan harian akan dimasukkan di sini -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- KONFIGURASI ---
+        // Ganti dengan API Key Anda dari OpenWeatherMap
+        const API_KEY = '5a682c3c692a87b401d24c08e5622416'; 
+
+        // --- ELEMEN DOM ---
+        const todayView = document.getElementById('today-view');
+        const forecastView = document.getElementById('forecast-view');
+        const next5DaysBtn = document.getElementById('next-5-days-btn');
+        const backBtn = document.getElementById('back-btn');
+
+        // --- IKON CUACA (SVG) ---
+        // Koleksi ikon SVG yang terinspirasi dari desain
+        const weatherIcons = {
+            '01d': `<svg viewBox="0 0 64 64"><g><circle cx="32" cy="32" r="11.2" fill="#f59e0b" stroke="#f59e0b" stroke-miterlimit="10" stroke-width="2"></circle><path fill="none" stroke="#f59e0b" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3" d="M32 15.7V9.5M32 54.5v-6.2M43.2 20.8l4.4-4.4M16.4 47.6l4.4-4.4M20.8 20.8l-4.4-4.4M47.6 47.6l-4.4-4.4M15.7 32H9.5M54.5 32h-6.2"></path></g></svg>`, // Clear sky day
+            '01n': `<svg viewBox="0 0 64 64"><g><path d="M32.3,46c-5.4,0-10.1-2.9-12.4-7.2c-0.3-0.6-0.7-1.1-1-1.7c-0.2-0.3-0.3-0.6-0.5-0.9 c-1.5-2.2-2.3-4.9-2.3-7.7c0-7.2,5.8-13,13-13c5.4,0,10,3.3,12,8c0.8,2,1.2,4,1.2,6.1c0,6-4.9,10.9-10.9,10.9 C32.2,40.1,32.2,40.1,32.3,46z" fill="#72809D"></path><path d="M33.4,46c-6.6,0-12-5.4-12-12c0-6.6,5.4-12,12-12c3.3,0,6.2,1.3,8.4,3.5 c2.2,2.2,3.5,5.1,3.5,8.4C45.3,40.6,39.9,46,33.4,46z" fill="#8695B3"></path></g></svg>`, // Clear sky night
+            '02d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#e2e8f0" stroke="#e2e8f0" stroke-miterlimit="10" stroke-width="3"></path><path d="M32.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,4,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,32.5,31.5Z" fill="#e2e8f0" stroke="#e2e8f0" stroke-miterlimit="10" stroke-width="3" transform="translate(14,0)"></path><animateTransform attributeName="transform" type="translate" values="14 0; -14 0; 14 0" dur="5s" repeatCount="indefinite"></animateTransform></g></svg>`, // Few clouds day
+            '02n': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#cbd5e1" stroke="#cbd5e1" stroke-miterlimit="10" stroke-width="3"></path><path d="M32.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,4,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,32.5,31.5Z" fill="#cbd5e1" stroke="#cbd5e1" stroke-miterlimit="10" stroke-width="3" transform="translate(14,0)"></path></g></svg>`, // Few clouds night
+            '03d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#cbd5e1" stroke="#cbd5e1" stroke-miterlimit="10" stroke-width="3"></path></g></svg>`, // Scattered clouds
+            '04d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#94a3b8" stroke="#94a3b8" stroke-miterlimit="10" stroke-width="3"></path><path d="M32.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,4,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,32.5,31.5Z" fill="#94a3b8" stroke="#94a3b8" stroke-miterlimit="10" stroke-width="3" transform="translate(14,0)"></path></g></svg>`, // Broken clouds
+            '09d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#94a3b8" stroke="#94a3b8" stroke-miterlimit="10" stroke-width="3"></path><line x1="24" y1="48" x2="24" y2="58" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"><animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/></line><line x1="32" y1="48" x2="32" y2="58" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"><animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0.2s"/></line><line x1="40" y1="48" x2="40" y2="58" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"><animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite" begin="0.4s"/></line></g></svg>`, // Shower rain
+            '10d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#94a3b8" stroke="#94a3b8" stroke-miterlimit="10" stroke-width="3"></path><line x1="32" y1="48" x2="32" y2="58" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"><animate attributeName="opacity" values="0;1;0" dur="1s" repeatCount="indefinite"/></line></g></svg>`, // Rain
+            '11d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#475569" stroke="#475569" stroke-miterlimit="10" stroke-width="3"></path><polygon points="28.5,42.5 35.5,42.5 31.5,50.5 35.5,50.5 26.5,62.5 29.5,52.5 25.5,52.5 28.5,42.5" fill="#f59e0b" stroke="#f59e0b" stroke-miterlimit="10" stroke-width="2"><animate attributeName="opacity" values="0;1;0" dur="0.8s" repeatCount="indefinite"/></polygon></g></svg>`, // Thunderstorm
+            '13d': `<svg viewBox="0 0 64 64"><g><path d="M46.5,31.5h-.32a10.49,10.49,0,0,0-19.11-8,7,7,0,0,0-10.57,6,7.21,7.21,0,0,0,.1,1.14A7.5,7.5,0,0,0,18,45.5a6.9,6.9,0,0,0,.84,0,7.5,7.5,0,0,0,14.2-2.13,10.5,10.5,0,0,0,10.29-9.35A7.5,7.5,0,0,0,46.5,31.5Z" fill="#94a3b8" stroke="#94a3b8" stroke-miterlimit="10" stroke-width="3"></path><g><line x1="28" y1="50" x2="36" y2="58" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></line><line x1="32" y1="48" x2="32" y2="60" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></line><line x1="36" y1="50" x2="28" y2="58" fill="none" stroke="#60a5fa" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"></line><animateTransform attributeName="transform" type="rotate" from="0 32 54" to="45 32 54" dur="1s" repeatCount="indefinite"/></g></g></svg>`, // Snow
+            '50d': `<svg viewBox="0 0 64 64"><g><line x1="10" y1="28" x2="54" y2="28" fill="none" stroke="#94a3b8" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"></line><line x1="10" y1="36" x2="54" y2="36" fill="none" stroke="#94a3b8" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"></line><line x1="10" y1="44" x2="54" y2="44" fill="none" stroke="#94a3b8" stroke-linecap="round" stroke-miterlimit="10" stroke-width="3"></line><animate attributeName="opacity" values="1;0.5;1" dur="2s" repeatCount="indefinite"/></g></svg>`, // Mist
+        };
+        // Duplikat ikon malam dari ikon siang jika tidak ada versi malam yang spesifik
+        weatherIcons['03n'] = weatherIcons['03d'];
+        weatherIcons['04n'] = weatherIcons['04d'];
+        weatherIcons['09n'] = weatherIcons['09d'];
+        weatherIcons['10n'] = weatherIcons['10d'];
+        weatherIcons['11n'] = weatherIcons['11d'];
+        weatherIcons['13n'] = weatherIcons['13d'];
+        weatherIcons['50n'] = weatherIcons['50d'];
+
+        // --- FUNGSI UTAMA ---
+
+        // Fungsi untuk mengambil data cuaca
+        async function getWeatherData(lat, lon) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=id`;
+            const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric&lang=id`;
+            
+            try {
+                const [weatherRes, forecastRes] = await Promise.all([fetch(url), fetch(forecastUrl)]);
+                if (!weatherRes.ok || !forecastRes.ok) throw new Error('Gagal mengambil data cuaca.');
+                
+                const weatherData = await weatherRes.json();
+                const forecastData = await forecastRes.json();
+                
+                updateTodayUI(weatherData, forecastData);
+                updateForecastUI(forecastData);
+
+            } catch (error) {
+                console.error("Error:", error);
+                document.getElementById('location').innerText = "Gagal memuat data";
+            }
+        }
+
+        // Fungsi untuk memperbarui UI Tampilan Hari Ini
+        function updateTodayUI(weather, forecast) {
+            const { name, main, weather: weatherDetails, wind } = weather;
+            const today = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+
+            document.getElementById('location').innerText = name;
+            document.getElementById('date').innerText = today.toLocaleDateString('id-ID', options);
+            document.getElementById('main-icon').innerHTML = weatherIcons[weatherDetails[0].icon] || weatherIcons['01d'];
+            document.getElementById('main-temp').innerText = `${Math.round(main.temp)}°`;
+            document.getElementById('feels-like').innerText = Math.round(main.feels_like);
+            document.getElementById('main-desc').innerText = weatherDetails[0].description;
+            
+            document.getElementById('precipitation').innerText = `${forecast.list[0].pop * 100}%`;
+            document.getElementById('wind-speed').innerText = `${(wind.speed * 3.6).toFixed(1)} km/h`;
+            document.getElementById('humidity').innerText = `${main.humidity}%`;
+            
+            // Perbarui prakiraan per jam
+            const hourlyContainer = document.getElementById('hourly-forecast');
+            hourlyContainer.innerHTML = '';
+            for (let i = 0; i < 8; i++) { // Tampilkan 8 jam ke depan
+                const item = forecast.list[i];
+                const time = new Date(item.dt * 1000).getHours();
+                const isActive = i === 1; // Jadikan item kedua aktif sebagai contoh
+                hourlyContainer.innerHTML += `
+                    <div class="flex flex-col items-center justify-between p-3 rounded-2xl text-center text-white/80 w-20 h-32 ${isActive ? 'hourly-item-active' : 'glass-card'}">
+                        <span class="text-sm">${time}:00</span>
+                        <div class="w-10 h-10 my-1">${weatherIcons[item.weather[0].icon] || weatherIcons['01d']}</div>
+                        <span class="font-bold text-lg">${Math.round(item.main.temp)}°</span>
+                    </div>
+                `;
+            }
+        }
+        
+        // Fungsi untuk memperbarui UI Tampilan 5 Hari
+        function updateForecastUI(forecastData) {
+            const dailyData = [];
+            const processedDays = new Set();
+
+            // Filter untuk mendapatkan satu data per hari (sekitar tengah hari)
+            forecastData.list.forEach(item => {
+                const day = new Date(item.dt * 1000).getDate();
+                if (!processedDays.has(day) && dailyData.length < 5) {
+                    dailyData.push(item);
+                    processedDays.add(day);
+                }
+            });
+
+            const dailyTabsContainer = document.getElementById('daily-tabs');
+            const dailyListContainer = document.getElementById('daily-forecast-list');
+            dailyTabsContainer.innerHTML = '';
+            dailyListContainer.innerHTML = '';
+
+            dailyData.forEach((day, index) => {
+                const date = new Date(day.dt * 1000);
+                const dayName = date.toLocaleDateString('id-ID', { weekday: 'short' });
+                const dayNum = date.getDate();
+
+                // Buat tab harian
+                dailyTabsContainer.innerHTML += `
+                    <button data-index="${index}" class="daily-tab-btn flex flex-col items-center justify-center p-3 rounded-2xl text-center text-white/80 w-14 h-20 ${index === 0 ? 'hourly-item-active' : 'glass-card'} transition">
+                        <span class="font-bold">${dayNum}</span>
+                        <span class="text-xs">${dayName}</span>
+                    </button>
+                `;
+
+                // Buat daftar harian
+                 dailyListContainer.innerHTML += `
+                    <div class="glass-card p-3 flex justify-between items-center text-white">
+                        <span>${date.toLocaleDateString('id-ID', { weekday: 'long' })}</span>
+                        <div class="flex items-center space-x-2">
+                           <div class="w-10 h-10">${weatherIcons[day.weather[0].icon] || weatherIcons['01d']}</div>
+                           <span class="font-bold text-lg">${Math.round(day.main.temp_max)}°/${Math.round(day.main.temp_min)}°</span>
+                        </div>
+                    </div>
+                 `;
+            });
+            
+            // Fungsi untuk memperbarui detail prakiraan saat tab diklik
+            function updateForecastDetails(dayData) {
+                document.getElementById('forecast-main-icon').innerHTML = weatherIcons[dayData.weather[0].icon] || weatherIcons['01d'];
+                document.getElementById('forecast-main-temp').innerText = `${Math.round(dayData.main.temp)}°`;
+                document.getElementById('forecast-feels-like').innerText = Math.round(dayData.main.feels_like);
+                document.getElementById('forecast-main-desc').innerText = dayData.weather[0].description;
+                document.getElementById('forecast-precipitation').innerText = `${dayData.pop * 100}%`;
+                document.getElementById('forecast-wind-speed').innerText = `${(dayData.wind.speed * 3.6).toFixed(1)} km/h`;
+                document.getElementById('forecast-humidity').innerText = `${dayData.main.humidity}%`;
+            }
+
+            // Tampilkan detail untuk hari pertama secara default
+            if(dailyData.length > 0) {
+                updateForecastDetails(dailyData[0]);
+            }
+
+            // Tambahkan event listener ke tab
+            document.querySelectorAll('.daily-tab-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.daily-tab-btn').forEach(b => b.classList.remove('hourly-item-active', 'glass-card'));
+                    document.querySelectorAll('.daily-tab-btn').forEach(b => {
+                        if (b !== btn) {
+                            b.classList.add('glass-card');
+                        }
+                    });
+                    btn.classList.add('hourly-item-active');
+                    const index = parseInt(btn.dataset.index);
+                    updateForecastDetails(dailyData[index]);
+                });
+            });
+        }
+        
+        // --- EVENT LISTENERS ---
+
+        // Navigasi antar tampilan
+        next5DaysBtn.addEventListener('click', () => {
+            todayView.classList.add('hidden');
+            forecastView.classList.remove('hidden');
+        });
+
+        backBtn.addEventListener('click', () => {
+            forecastView.classList.add('hidden');
+            todayView.classList.remove('hidden');
+        });
+
+        // Memulai aplikasi saat halaman dimuat
+        window.addEventListener('load', () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        getWeatherData(latitude, longitude);
+                    },
+                    (error) => {
+                        console.error("Error getting location: ", error);
+                        // Fallback ke Jakarta jika lokasi gagal didapat
+                        getWeatherData(-6.2088, 106.8456); 
+                    }
+                );
+            } else {
+                alert("Geolocation tidak didukung oleh browser ini.");
+                // Fallback ke Jakarta
+                getWeatherData(-6.2088, 106.8456);
+            }
+        });
+
+    </script>
+</body>
+</html>
+
