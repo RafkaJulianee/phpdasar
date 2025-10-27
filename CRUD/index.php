@@ -32,6 +32,11 @@ include "koneksi.php";
       }
       a{
         text-decoration: none;
+        color: black;
+        padding: 5px;
+      }
+      a:hover{
+        color: blue;
       }
     </style>
   </head>
