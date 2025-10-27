@@ -37,7 +37,7 @@ include "koneksi.php";
     <div class="container">
       <div class="container">
         <div class="cloud">
-          <span><h2 style="font-family:Montserrat;">Data Siswa</h2></span>
+          <span><h2 style="font-family:Montserrat;">DATA SISWA</h2></span>
         </div>
       </div>
 
