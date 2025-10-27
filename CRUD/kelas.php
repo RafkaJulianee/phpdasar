@@ -51,39 +51,32 @@ include "koneksi.php";
           <a href="kelas.php">Data Kelas</a>
         </div>
         <div class="cloud">
-          <span><h2 style="font-family:Montserrat;">DATA SISWA</h2></span>
+          <span><h2 style="font-family:Montserrat;">DATA KELAS</h2></span>
         </div>
       </div>
 
-      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Siswa</a>
+      <a href="tambah.php" class="btn btn-primary mb-3">+ Tambah Tambah Kelas</a>
 
       <table class="table">
         <thead class="table-blue">
           <tr>
             <th>No</th>
-            <th>NIS</th>
-            <th>Nama</th>
-            <th>Kelas</th>
-            <th>Jenis Kelamin</th>
-            <th>Alamat</th>
-            <th>No Hp</th>
+            <th>KELAS</th>
+            <th>JURUSAN</th>
             <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
           <?php
           $no = 1;
-          $query = mysqli_query($conn, "SELECT * FROM siswa");
+          $query = mysqli_query($conn, "SELECT * FROM kelas");
           while ($row = mysqli_fetch_assoc($query)) {
           ?>
             <tr>
               <td><?= $no++; ?></td>
-              <td><?= $row['nis']; ?></td>
-              <td><?= $row['nama']; ?></td>
-              <td><?= $row['kelas']; ?></td>
-              <td><?= $row['jenis_kelamin']; ?></td>
-              <td><?= $row['alamat']; ?></td>
-              <td><?= $row['no_hp']; ?></td>
+              <td><?= $row['Kelas']; ?></td>
+              <td><?= $row['Jurusan']; ?></td>
+
               <td>
                 <a class="btn" style="color:green;" href="edit.php?nis=<?= $row['nis']; ?>">Edit</a>
                 <a class="btn" style="color:red;" href="hapus.php?nis=<?= $row['nis']; ?>" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
