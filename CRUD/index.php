@@ -25,6 +25,11 @@ include "koneksi.php";
       body{
         font-family: "Montserrat";
       }
+
+      h2:hover{
+        color: blue;
+        
+      }
     </style>
   </head>
 
