@@ -76,10 +76,9 @@ include "koneksi.php";
               <td><?= $no++; ?></td>
               <td><?= $row['kelas']; ?></td>
               <td><?= $row['jurusan']; ?></td>
-
               <td>
-                <a class="btn" style="color:green;" href="edit.php?nis=<?= $row['nis']; ?>">Edit</a>
-                <a class="btn" style="color:red;" href="hapus.php?nis=<?= $row['nis']; ?>" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
+                <a class="btn" style="color:green;" href="edit.php?nis=<?= $row['id']; ?>">Edit</a>
+                <a class="btn" style="color:red;" href="hapus.php?nis=<?= $row['id']; ?>" onclick="return confirm('Yakin mau hapus data ini?')">Hapus</a>
               </td>
             </tr>
           <?php } ?>
