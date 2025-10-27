@@ -36,6 +36,11 @@ include "koneksi.php";
   <body>
     <div class="container">
       <div class="container">
+        <div class="navbar">
+          <a href="index.php">Dashboard</a>
+          <a href="index.php">Data Siswa</a>
+          <a href="kelas.php">Data Kelas</a>
+        </div>
         <div class="cloud">
           <span><h2 style="font-family:Montserrat;">DATA SISWA</h2></span>
         </div>
