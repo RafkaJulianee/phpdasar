@@ -30,6 +30,9 @@ include "koneksi.php";
         color: blue;
         
       }
+      a{
+        text-decoration: none;
+      }
     </style>
   </head>
 
