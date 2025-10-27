@@ -31,13 +31,21 @@ include "koneksi.php";
 
       a {
         text-decoration: none;
-        color: black;
+        color: white;
         padding: 5px;
+
       }
 
       a:hover {
-        color: blue;
+        color: red;
     
+      }
+      .navbar{
+        border: solid;
+        padding: 10px;
+        border-radius: 15px;
+        background-color: blue;
+
       }
 
       .navbar {
