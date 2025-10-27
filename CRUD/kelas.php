@@ -74,8 +74,8 @@ include "koneksi.php";
           ?>
             <tr>
               <td><?= $no++; ?></td>
-              <td><?= $row['Kelas']; ?></td>
-              <td><?= $row['Jurusan']; ?></td>
+              <td><?= $row['kelas']; ?></td>
+              <td><?= $row['jurusan']; ?></td>
 
               <td>
                 <a class="btn" style="color:green;" href="edit.php?nis=<?= $row['nis']; ?>">Edit</a>
