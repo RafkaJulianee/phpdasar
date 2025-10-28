@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Cek apakah kelas sudah ada
     $cek = mysqli_query($conn, "SELECT * FROM kelas WHERE kelas='$kelas' AND jurusan='$jurusan'");
     if (mysqli_num_rows($cek) > 0) {
-        echo "<script>alert('Kelas dan Jurusan ini sudah ada!'); window.location='tambah_kelas.php';</script>";
+        echo "<script>alert('Kelas dan Jurusan ini sudah ada!'); window.location='tambahkelas.php';</script>";
     } else {
         // Simpan data ke tabel kelas
         $query = "INSERT INTO kelas (kelas, jurusan) VALUES ('$kelas', '$jurusan')";
