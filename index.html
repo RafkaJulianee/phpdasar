@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belajar JavaScript Interaktif</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    button {
+      background: white;
+      color: #2575fc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #2575fc;
+      color: white;
+      transform: scale(1.05);
+    }
+    .kotak {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 20px;
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>💡 Bandingin HTML vs JavaScript</h1>
+  <p>HTML nentuin tampilan — JS bikin interaksi.</p>
+
+  <div class="kotak">
+    <h2 id="judul">Ini teks dari HTML</h2>
+    <button id="ubahTeks">Ubah Teks (via JS)</button>
+  </div>
+
+  <div class="kotak">
+    <p id="hasil">Klik tombol di bawah buat munculin angka random!</p>
+    <button id="angkaRandom">Tampilkan Angka</button>
+  </div>
+
+  <div class="kotak">
+    <p id="warna">Warna latar sekarang ungu 🌈</p>
+    <button id="ubahWarna">Ubah Warna Latar</button>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
