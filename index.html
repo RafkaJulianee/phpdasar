@@ -55,7 +55,47 @@
   </div>
 
   <script>
-    
+    // ========================
+// 🔸 1. Ubah teks di HTML
+// ========================
+const judul = document.getElementById("judul");
+const tombolUbah = document.getElementById("ubahTeks");
+
+tombolUbah.addEventListener("click", () => {
+  judul.textContent = "Teks ini diubah oleh JavaScript 😎";
+});
+
+// ===============================
+// 🔸 2. Generate angka random
+// ===============================
+const hasil = document.getElementById("hasil");
+const tombolAngka = document.getElementById("angkaRandom");
+
+tombolAngka.addEventListener("click", () => {
+  const angka = Math.floor(Math.random() * 100);
+  hasil.textContent = `Angka random: ${angka}`;
+});
+
+// ===============================
+// 🔸 3. Ubah warna background
+// ===============================
+const warnaText = document.getElementById("warna");
+const tombolWarna = document.getElementById("ubahWarna");
+let warnaSekarang = 0;
+
+const warnaList = [
+  "linear-gradient(135deg, #ff9a9e, #fad0c4)",
+  "linear-gradient(135deg, #a18cd1, #fbc2eb)",
+  "linear-gradient(135deg, #f6d365, #fda085)",
+  "linear-gradient(135deg, #84fab0, #8fd3f4)"
+];
+
+tombolWarna.addEventListener("click", () => {
+  warnaSekarang = (warnaSekarang + 1) % warnaList.length;
+  document.body.style.background = warnaList[warnaSekarang];
+  warnaText.textContent = `Warna latar diubah via JS 🌈`;
+});
+
   </script>
 </body>
 </html>
