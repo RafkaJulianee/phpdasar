@@ -1,5 +1,5 @@
  fristname="Dominik"
  lastname='szobozlai'
- fulname=  fristname + ""+ lastname
+ fulname=  fristname + "" + lastname
 
  console.log(fulname)
