@@ -25,9 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($hasil->num_rows > 0) {
         $data = $hasil->fetch_assoc();
 
-        if (password_verify($password, $data['password'])) {
+        // PERBAIKAN: Gunakan password biasa (tidak di-hash)
+        // Karena di register password disimpan sebagai plain text
+        if ($password === $data['password']) {
             $_SESSION['username'] = $data['username'];
-            header("Location: dashboard.php");
+            $_SESSION['role'] = $data['role']; // Simpan role di session
+            header("Location: index.php");
             exit;
         } else {
             $error = "Password salah!";
@@ -55,8 +58,8 @@ Viki */
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: #000;
-  background-color: #242424;
+  color-scheme: light;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -72,6 +75,7 @@ body {
   background: #fff;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 main {
@@ -79,6 +83,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 24px;
+  background: #fff;
 }
 
 section {
@@ -260,6 +265,7 @@ a {
   font-size: 14px;
   text-align: center;
   margin: 32px 0 0;
+  color: #374151;
 }
 
 .ball {
@@ -532,6 +538,18 @@ a {
     transform: none !important;
   }
 }
+
+.error-message {
+  color: #dc2626;
+  text-align: center;
+  margin: 16px 0;
+  padding: 12px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 420px;
+}
     </style>
 </head>
 <body>
@@ -548,12 +566,12 @@ a {
             <p class="form__description">Please log in to continue</p>
 
             <?php if (!empty($error)) : ?>
-                <p style="color: red; text-align:center;"><?= $error ?></p>
+                <div class="error-message"><?= $error ?></div>
             <?php endif; ?>
 
             <form method="POST" action="">
                 <label class="form-control__label">Username</label>
-                <input type="text" name="username" class="form-control" required>
+                <input type="text" name="username" class="form-control" required value="<?= isset($_POST['username']) ? htmlspecialchars($_POST['username']) : '' ?>">
         
                 <label class="form-control__label">Password</label>
                 <div class="password-field">
@@ -580,7 +598,7 @@ a {
             </form>
         
             <p class="form__footer">
-                Don’t have an account?<br> <a href="register.php">Create an account</a>
+                Don't have an account?<br> <a href="register.php">Create an account</a>
             </p>
         </section>
         

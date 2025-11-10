@@ -4,20 +4,21 @@ include 'koneksi.php'; // koneksi lama kamu
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $role = mysqli_real_escape_string($conn, $_POST['role']);
 
     // cek apakah username sudah ada
-    $check = mysqli_query($conn, "SELECT * FROM tbl_siswa WHERE username = '$username'");
+    $check = mysqli_query($conn, "SELECT * FROM tbl_user WHERE username = '$username'");
     if (mysqli_num_rows($check) > 0) {
         echo "<script>alert('Username sudah digunakan!'); window.history.back();</script>";
         exit;
     }
 
     // simpan ke database
-    $sql = "INSERT INTO tbl_user (username, password) VALUES ('$username', '$password')";
+    $sql = "INSERT INTO tbl_user (username, password, role) VALUES ('$username', '$password', '$role')";
     $result = mysqli_query($conn, $sql);
 
     if ($result) {
-        echo "<script>alert('Akun berhasil dibuat! Silakan login.'); window.location.href='index.html';</script>";
+        echo "<script>alert('Akun berhasil dibuat! Silakan login.'); window.location.href='login.php';</script>";
     } else {
         echo "<script>alert('Gagal membuat akun!'); window.history.back();</script>";
     }
@@ -42,8 +43,8 @@ Viki */
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: #000;
-  background-color: #242424;
+  color-scheme: light;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -59,6 +60,7 @@ body {
   background: #fff;
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 
 main {
@@ -66,6 +68,7 @@ main {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   padding: 24px;
+  background: #fff;
 }
 
 section {
@@ -247,6 +250,7 @@ a {
   font-size: 14px;
   text-align: center;
   margin: 32px 0 0;
+  color: #374151;
 }
 
 .ball {
@@ -519,6 +523,7 @@ a {
     transform: none !important;
   }
 }
+
 </style>
 <body>
     
@@ -543,18 +548,17 @@ a {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
                 </svg>
             </div>
-
-            <!-- INI BAGIAN YANG DITAMBAHKAN -->
+            
             <label class="form-control__label">Role</label>
             <select class="form-control" name="role" required>
-                <option value="" disabled selected>Select your role</option>
+                <option value="">Pilih Role</option>
                 <option value="admin">Admin</option>
                 <option value="user">User</option>
             </select>
-            <!-- AKHIR BAGIAN TAMBAHAN -->
 
             <button type="submit" class="form__submit" id="submit">Create Account</button>
         </form>
+        
 
         <p class="form__footer">
             Already have an account?<br> <a href="login.php">Log in here</a>
