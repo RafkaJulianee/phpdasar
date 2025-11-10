@@ -103,7 +103,8 @@ include "koneksi.php";
               <a class="nav-link" href="kelas.user.php">Data Kelas</a>
             </li>
              <li class="nav-item">
-              <a class="nav-link" href="login.php"><b>Logout</b></a>
+              
+                <a class="nav-link" href="login.php" style="color: blue;">Logout</a>
             </li>
             
           </ul>
