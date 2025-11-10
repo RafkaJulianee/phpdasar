@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Create Account</title>
+    <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
 </head>
 <style>
     /* author: https://codepen.io/viki-code/pen/rNPjzpX

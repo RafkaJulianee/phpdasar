@@ -58,6 +58,7 @@ if (isset($_POST['update'])) {
   <title>Edit</title>
   <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="img/icon.png" type="image/x-icon">
   <style>
     body {
       font-family: "Montserrat", sans-serif;
