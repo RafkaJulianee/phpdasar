@@ -1,17 +1,14 @@
 <?php
 session_start();
 
-// Koneksi ke database
 $koneksi = new mysqli("localhost", "root", "", "db_siswarpl1");
 
-// Cek koneksi
 if ($koneksi->connect_error) {
     die("Koneksi gagal: " . $koneksi->connect_error);
 }
 
 $error = "";
 
-// Proses login
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
@@ -25,12 +22,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($hasil->num_rows > 0) {
         $data = $hasil->fetch_assoc();
 
-        // PERBAIKAN: Gunakan password biasa (tidak di-hash)
-        // Karena di register password disimpan sebagai plain text
         if ($password === $data['password']) {
             $_SESSION['username'] = $data['username'];
-            $_SESSION['role'] = $data['role']; // Simpan role di session
-            header("Location: index.php");
+            $_SESSION['role'] = $data['role'];
+            
+            // PERBAIKAN: Redirect berdasarkan role
+            if ($data['role'] == 'admin') {
+                header("Location:index.php");
+            } elseif ($data['role'] == 'user') {
+                header("Location: index.user.php");
+            } else {
+                // Fallback default page
+                header("Location: index.php");
+            }
             exit;
         } else {
             $error = "Password salah!";
